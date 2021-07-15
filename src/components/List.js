@@ -177,12 +177,12 @@ function List() {
                         {new Date(item.date).toLocaleDateString()} { new Date(item.date).toLocaleTimeString()}
                       </IconButton>
 
-                      { item.requested ? <CheckBoxIcon style={{ fill: 'green',marginLeft: "auto"}} />  :
+                      { item.requested ? <IconButton size="small" color="primary" style={{marginLeft: "auto"}}> <CheckBoxIcon style={{ fill: 'green',marginLeft: "auto"}} /> </IconButton> :
                       <IconButton size="small" color="primary" style={{marginLeft: "auto"}}>
                         <CreateIcon />
                       </IconButton>
                       }
-                       { item.requested ? <CancelIcon style={{ fill: 'red'}} />  :
+                       { item.requested ? <IconButton size="small" color="primary"> <CancelIcon style={{ fill: 'red'}} /> </IconButton>  :
                       <Link to={`/delete/${item._id}`}size="small" color="primary" onClick={handleDelete}>
                         <DeleteIcon />
                       </Link>

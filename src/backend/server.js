@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser')
 require('dotenv').config()
 
 const Item = require("./models/Item");
@@ -22,10 +23,10 @@ const app = express();
 // browser
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser())
 
 // to get all of the items
 app.get("/", (req, res) => {
-    
     Item.find((err, items) => {
         if (err) {
           console.log(err);
@@ -77,6 +78,11 @@ app.get("/verify/:email", (req, res) => {
   User.find({"email":email}, (err, user) => {
   });  
 });
+
+app.post("/requestpending", (req, res) => {
+  console.log(req.body.e)
+  res.send('Success!')  
+})  
 
 // to get a single todo by id
 app.get("/:id", (req, res) => {
