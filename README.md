@@ -8,7 +8,7 @@
 
 1. Use ```git clone --branch master https://github.com/ayushbudh/college-food-saver``` or Download button to use the code on your local machine.
 2. After the code is downloaded into your local machine run ```npm install``` in your CMP/terminal.
-3. Open another terminal or split the terminal and navigate inside the ``/src/backend/``` directory to run ```npm install`` in your CMP/terminal.
+3. Open another terminal or split the terminal and navigate inside the ```/src/backend/``` directory to run ```npm install``` in your CMP/terminal.
 4. After the installation is complete run the command ```npm run serve``` inside your /src/backend terminal to start the backend server.
 5. Finally run command ```npm start``` within the root of the project to start the local server in port 3000.
 
