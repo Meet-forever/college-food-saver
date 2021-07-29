@@ -11,12 +11,16 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import { useAuth } from "../../context/AuthContext"
 import { useHistory } from "react-router-dom"
 import Link from '@material-ui/core/Link';
 import Alert from '@material-ui/lab/Alert';
 import logo from '../assets/logincover.png'
+import Modal from '@material-ui/core/Modal';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Fade from '@material-ui/core/Fade';
+import Backdrop from '@material-ui/core/Backdrop';
 
+import firebase from "firebase/app"
 
 function Copyright() {
   return (
@@ -60,6 +64,18 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  paper2: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(2, 4, 3),
+  },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
 function Login() {
@@ -67,23 +83,34 @@ function Login() {
   const classes = useStyles();
   const emailRef = useRef()
   const passwordRef = useRef()
-  const { login } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
+  const [ loginStatus, setLoginStatus ] = useState({})
+  const [open, setOpen] = useState(false);
   const history = useHistory()
   
   async function handleFormSubmit(e) {
     e.preventDefault()
-    try {
-      setError("")
-      setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to log in")
-    }
 
-    setLoading(false)
+    firebase.auth().signInWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
+    .then((userCredential) => {
+      setOpen(true);
+      // Signed in
+      var user = userCredential.user;
+      setLoginStatus({ msg: "Signing In.....", authSuccess: "yes" })
+
+    })
+    .then(() => {
+      setTimeout(() => {
+          setOpen(false);
+          history.push("/")
+      }, 3000)
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      setLoginStatus({ msg: errorMessage,  authSuccess: "no" })
+    });
+
   }
 
   return (
@@ -99,7 +126,8 @@ function Login() {
             Sign in
           </Typography>
           <form className={classes.form} onSubmit={handleFormSubmit} >
-            {error && <Alert severity="error">Invalid Credentials! Please try again.</Alert>}
+            { loginStatus.authSuccess === "yes" && <Alert severity="success"> { loginStatus.msg }</Alert> }
+            { loginStatus.authSuccess === "no" && <Alert severity="error"> { loginStatus.msg }</Alert> }
 
             <TextField
               variant="outlined"
@@ -136,7 +164,7 @@ function Login() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              {loginStatus.authSuccess === "yes" ? <CircularProgress color="secondary"/>  : "Sign In" }
             </Button>
             <Grid container>
               <Grid item xs>
@@ -155,6 +183,31 @@ function Login() {
               <Copyright />
             </Box>
           </form>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+
+            // onClose={handleModalClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+            timeout: 500,
+            }}
+      >
+
+        <Fade in={open}>
+
+        <div className={classes.paper2}>
+          <h2 id="transition-modal-title">Signing In...</h2>
+            <div>
+              <CircularProgress  /> 
+            </div>         
+        </div>
+        </Fade>
+    
+      </Modal>
         </div>
       </Grid>
     </Grid>

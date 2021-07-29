@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Paper from '@material-ui/core/Paper';
@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import NavBar from './Navbar'
 import { getItems } from "../Api.js"
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { AuthContext } from '../context/AuthContext';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -86,9 +87,9 @@ function Home() {
   
 const [ totalOrders, setTotalOrders ] = useState(0)
 const [ loading, setLoading ] = useState(false);
-
+const { currentUser } = useContext(AuthContext);
 const classes = useStyles()
-var base = +new Date(1968, 9, 3);
+var base = new Date(1968, 9, 3);
 var oneDay = 24 * 3600 * 1000;
 var date = [];
 
@@ -101,6 +102,7 @@ for (var i = 1; i < 20000; i++) {
 }
 
 useEffect(() => {
+
     setLoading(true)
     const fetchItems = async () => {
     const newItems = await getItems()

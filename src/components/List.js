@@ -7,14 +7,11 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import ViewQuiltIcon from '@material-ui/icons/ViewQuilt';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import AddIcon from '@material-ui/icons/Add';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import Box from '@material-ui/core/Box';
 import { Container } from '@material-ui/core';
@@ -52,8 +49,6 @@ function createData(name, description, calories, fat, carbs, protein, date) {
   return { name, description, calories, fat, carbs, protein, date };
 }
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -89,20 +84,20 @@ function List() {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(+event.target.value);
+    setRowsPerPage(event.target.value);
     setPage(0);
   };
 
   // add this function to clean in useEffect
   const onImageLoad = () => {
    setImgCounter ( imgCounter + 1)
-   console.log(`Img Counter: ${imgCounter} Items: ${items.length}`)
-   if( imgCounter >= items.length){
+   if( imgCounter >= items.length ){
      setLoading(false)
    }
   }
 
   useEffect(() => {
+
     const fetchItems = async () => {
       setLoading(true)
       const newItems = await getItems()
@@ -142,7 +137,6 @@ function List() {
            </ToggleButtonGroup>
            </div>
            
-    
     <div className={classes.root} >
     {view === 'module' ?  
     
@@ -158,7 +152,7 @@ function List() {
                       <CardMedia
                       className={classes.media}
                       component="img"
-                      image={Signup}
+                      image={ item.itemImageURL ? item.itemImageURL : Signup}
                       title="Contemplative Reptile"
                       onLoad={onImageLoad}
                       />
@@ -192,8 +186,8 @@ function List() {
                 </Card>
               </Grid>
               ))
-              
         }
+        
         <Grid item xs={6} sm={3}>
           <Box  border={1} borderRadius={5} p={7.5} borderColor="grey.400">
             <IconButton onClick={handleAddClick}>
@@ -203,7 +197,9 @@ function List() {
         </Grid>
         </Grid>
       }
-      </Container>: 
+      </Container>
+      
+      : 
       
       // list view
       <Container maxWidth="lg">
@@ -212,7 +208,7 @@ function List() {
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              { columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
@@ -224,7 +220,7 @@ function List() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+            { rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
               return (
                 <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
                   {columns.map((column) => {

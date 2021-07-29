@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,11 +13,14 @@ import LockOutlinedIcon   from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
-import { auth } from "../../firebase"
-import { useAuth } from "../../context/AuthContext"
 import Alert from '@material-ui/lab/Alert';
 import coverImg from '../assets/signupcover.jpeg'
-
+import Backdrop from '@material-ui/core/Backdrop';
+import Modal from '@material-ui/core/Modal';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Fade from '@material-ui/core/Fade';
+import firebase from "firebase/app"
+import { AuthContext } from '../../context/AuthContext';
 
 
 
@@ -35,9 +38,17 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     margin: theme.spacing(8, 4),
+    backgroundColor: theme.palette.background.paper,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+  },
+  paper2: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(2, 4, 3),
   },
   avatar: {
     margin: theme.spacing(1),
@@ -50,18 +61,26 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 }));
 
-function Signup() {
-  const classes = useStyles();
 
+
+function Signup() {
+
+  const classes = useStyles();
   const emailRef = useRef()
   const passwordRef = useRef()
   const passwordConfirmRef = useRef()
-  const { signup } = useAuth()
-  const [ error, setError ] = useState("")
-  const [ loading, setLoading ] = useState(false)
   const history = useHistory()
+  const [ loginStatus, setLoginStatus ] = useState({})
+  const [open, setOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const [ user, setUser ] = currentUser
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -70,22 +89,31 @@ function Signup() {
     //   return setError("Passwords do not match")
     // }
 
-    try {
-      setError("")
-      setLoading(true)
-      await signup(emailRef.current.value, passwordRef.current.value)
-      history.push("/")
-    } catch {
-      setError("Failed to create an account")
-    }
-    setLoading(false)
-  }
+    firebase.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
+    .then((userCredential) => {
+      setOpen(true);
+      // Signed up 
+      var user = userCredential.user;
+      setUser(JSON.stringify(user))
+      setLoginStatus({ msg: "Signing Up.....", authSuccess: "yes" })
+    })
+    .then(() => {
+        setTimeout(() => {
+            setOpen(false);
+            history.push("/")
+        }, 3000)
+    })
+    .catch((error) => {
+      var errorMessage = error.message;
+      setLoginStatus({ msg: errorMessage,  authSuccess: "no" })
 
- 
+    });
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
+      
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -95,7 +123,8 @@ function Signup() {
             Sign up
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
-            {error && <Alert severity="error">Invalid Credentials! Please try again.</Alert>}
+            { loginStatus.authSuccess === "yes" && <Alert severity="success"> { loginStatus.msg }</Alert> }
+            { loginStatus.authSuccess === "no" && <Alert severity="error"> { loginStatus.msg }</Alert> }
 
             <TextField
               variant="outlined"
@@ -132,7 +161,7 @@ function Signup() {
               color="primary"
               className={classes.submit}
             >
-              Sign Up
+              {loginStatus.authSuccess === "yes"  ? <CircularProgress color="secondary"/>  : "Sign Up" }
             </Button>
             <Grid container>
               <Grid item xs>
@@ -150,10 +179,37 @@ function Signup() {
             <Box mt={5}>
             </Box>
           </form>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            className={classes.modal}
+            open={open}
+
+            // onClose={handleModalClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+            timeout: 500,
+            }}
+      >
+
+        <Fade in={open}>
+
+        <div className={classes.paper2}>
+          <h2 id="transition-modal-title">Signing Up...</h2>
+            <div>
+              <CircularProgress  /> 
+            </div>         
+        </div>
+        </Fade>
+    
+      </Modal>
         </div>
       </Grid>
+      
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
-    </Grid>
+      
+    </Grid>    
   );
 }
 

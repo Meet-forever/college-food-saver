@@ -8,7 +8,6 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
@@ -20,9 +19,6 @@ import { useHistory } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange, green } from '@material-ui/core/colors';
 import logo from './assets/navbarlogo.png'
-import { spacing } from '@material-ui/system';
-import { useAuth } from "../context/AuthContext"
-import Alert from '@material-ui/lab/Alert';
 import { getItems } from "../Api.js"
 
 
@@ -109,7 +105,6 @@ function NavBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const [error, setError] = useState("")
-  const { currentUser, logout } = useAuth()
   
   const [ itemsNotificationCount, setItemsNotificationCount ] = useState(0)
 
@@ -126,7 +121,6 @@ function NavBar() {
     setError("")
 
     try {
-      await logout()
       history.push("/login")
     } catch {
       setError("Failed to log out")

@@ -29,6 +29,8 @@ const Item = mongoose.Schema({
   },
   r_accepted: {
     type: Boolean,
+  },
+  itemImageURL: {
   }
 });
 

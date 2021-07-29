@@ -19,7 +19,7 @@ const App = () => {
         <Route exact path="/home" component={Home}/>
         <Route exact path="/list" component={List}/>
         <Route exact path="/add" component={Add}/>
-        <Route exact path="/delete/:id" component={Delete}/>
+        <Route exact path="/delete/:id" component={Delete}/> 
       </Switch>
     </AuthProvider>
     </div>
