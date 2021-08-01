@@ -83,8 +83,8 @@ function Login() {
   const classes = useStyles();
   const emailRef = useRef()
   const passwordRef = useRef()
-  const [error, setError] = useState("")
-  const [loading, setLoading] = useState(false)
+  // const [error, setError] = useState("")
+  // const [loading, setLoading] = useState(false)
   const [ loginStatus, setLoginStatus ] = useState({})
   const [open, setOpen] = useState(false);
   const history = useHistory()
@@ -96,14 +96,15 @@ function Login() {
     .then((userCredential) => {
       setOpen(true);
       // Signed in
-      var user = userCredential.user;
+      const user = userCredential.user;
+      localStorage.setItem('user_id',JSON.stringify(user.uid));
       setLoginStatus({ msg: "Signing In.....", authSuccess: "yes" })
 
     })
     .then(() => {
       setTimeout(() => {
           setOpen(false);
-          history.push("/")
+          history.push("/home")
       }, 3000)
     })
     .catch((error) => {

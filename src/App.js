@@ -1,27 +1,31 @@
 import './App.css';
 import Login from './components/auth/Login'
-import { Route, Switch, Link } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Home from './components/Home.js'
 import Signup from './components/auth/Signup.js'
 import List from './components/List.js'
 import Add from './components/Add.js'
-import Delete from './components/Delete.js'
-import { AuthProvider } from "./context/AuthContext"
+
+const ProtectedRoute = (props) => {
+  return(
+        <Route path={props.path} render={data=> localStorage.getItem('user_id') === null || localStorage.getItem('user_id') === "NOACTIVEUSER" ? 
+        (<Redirect to={{pathname:'/login'}}></Redirect>):
+        (<props.component {...data}></props.component>)}></Route>
+    )
+  }
 
 const App = () => {
+
   return (
     <div className="App">
-    <AuthProvider>
       <Switch>
-        <Route exact path="/" component={Home}/>
-        <Route exact path="/login" component={Login}/>
-        <Route exact path="/signup" component={Signup}/>
-        <Route exact path="/home" component={Home}/>
-        <Route exact path="/list" component={List}/>
-        <Route exact path="/add" component={Add}/>
-        <Route exact path="/delete/:id" component={Delete}/> 
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
+        <ProtectedRoute exact path="/home" component={Home}/>
+        <ProtectedRoute exact path="/" component={Home}/>
+        <ProtectedRoute exact path="/list" component={List} />
+        <ProtectedRoute exact path="/add" component={Add} />
       </Switch>
-    </AuthProvider>
     </div>
   );
 }

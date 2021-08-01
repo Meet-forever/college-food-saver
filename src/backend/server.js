@@ -2,10 +2,8 @@ const express = require("express");
 const cors = require("cors");
 var bodyParser = require('body-parser');
 const mongoose = require("mongoose");
-const fs = require("fs")
 var path = require('path');
 const { uuid } = require('uuidv4');
-var multer = require('multer');
 
 
 require('dotenv').config()
@@ -31,32 +29,6 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-
-
-
-// var storage = multer.diskStorage({
-// 	destination: (req, file, cb) => {
-// 		cb(null, './uploads/')
-// 	},
-// 	filename: (req, file, cb) => {
-//     const fileName = file.originalname.toLowerCase().split(' ').join('-');
-//     cb(null, uuid() + '-' + fileName)
-// 	}
-// });
-
-
-// var upload = multer({
-//   storage: storage,
-//   fileFilter: (req, file, cb) => {
-//       if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
-//           cb(null, true);
-//       } else {
-//           cb(null, false);
-//           return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
-//       }
-//   }
-// });
-
 
 // to get all of the items
 app.get("/", (req, res) => {

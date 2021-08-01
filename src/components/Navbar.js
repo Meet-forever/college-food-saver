@@ -17,9 +17,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import { useHistory } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
-import { deepOrange, green } from '@material-ui/core/colors';
+import { deepOrange } from '@material-ui/core/colors';
 import logo from './assets/navbarlogo.png'
 import { getItems } from "../Api.js"
+import firebase from "firebase/app"
 
 
 
@@ -117,13 +118,22 @@ function NavBar() {
     fetchItems()
   }, [])
 
-  async function handleLogout() {
-    setError("")
+  function handleLogout() {
+
+    firebase.auth().signOut()
+    .then((user) => {
+      history.push("/login")
+    })
+    .catch((error) => {
+      const errorMessage = error.message;
+      setError(errorMessage)
+    })
 
     try {
+      localStorage.setItem("user_id", "NOACTIVEUSER")
       history.push("/login")
     } catch {
-      setError("Failed to log out")
+      setError("Failed to log out!")
     }
   }
 

@@ -1,15 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import ReactEcharts from "echarts-for-react";
 import Box from '@material-ui/core/Box';
 import NavBar from './Navbar'
 import { getItems } from "../Api.js"
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { AuthContext } from '../context/AuthContext';
-
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -84,25 +80,28 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Home() {
-  
-const [ totalOrders, setTotalOrders ] = useState(0)
+ 
+const [ totalOrders, setTotalOrders ] = useState(100)
 const [ loading, setLoading ] = useState(false);
-const { currentUser } = useContext(AuthContext);
 const classes = useStyles()
-var base = new Date(1968, 9, 3);
-var oneDay = 24 * 3600 * 1000;
+
+// Dummy Data
+
 var date = [];
-
 var data = [Math.random() * 300];
+date.push([new Date().getFullYear(), new Date().getMonth() + 1, new Date().getDate()].join('/'));
+data.push(Math.round((Math.random() - 0.5) * 20));
 
-for (var i = 1; i < 20000; i++) {
-    var now = new Date(base += oneDay);
-    date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
-    data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
-}
+// var base = new Date(1968, 9, 3);
+// var oneDay = 24 * 3600 * 1000;
+// for (var i = 1; i < 20000; i++) {
+//     var now = new Date(base += oneDay);
+//     date.push([now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'));
+//     data.push(Math.round((Math.random() - 0.5) * 20 + data[i - 1]));
+// } 
+
 
 useEffect(() => {
-
     setLoading(true)
     const fetchItems = async () => {
     const newItems = await getItems()
@@ -115,9 +114,14 @@ useEffect(() => {
 
   
   return (
-    <div>
+
+ 
+
+      <div>
       <NavBar />
+
       <div className={classes.root}>
+        
       <Grid container  direction="row" justify="center" alignItems="center">
         <Grid item xs={5}>
           <Box mt={10}>
@@ -235,6 +239,7 @@ useEffect(() => {
       </Grid>
     </div>
     </div>
+
   );
 }
 

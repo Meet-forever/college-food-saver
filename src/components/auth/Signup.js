@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -20,7 +20,7 @@ import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Fade from '@material-ui/core/Fade';
 import firebase from "firebase/app"
-import { AuthContext } from '../../context/AuthContext';
+// import { AuthContext } from '../../context/AuthContext';
 
 
 
@@ -75,12 +75,12 @@ function Signup() {
   const classes = useStyles();
   const emailRef = useRef()
   const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
+  // const passwordConfirmRef = useRef()
   const history = useHistory()
   const [ loginStatus, setLoginStatus ] = useState({})
   const [open, setOpen] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  const [ user, setUser ] = currentUser
+  // const { currentUser } = useContext(AuthContext);
+  // const [ user, setUser ] = currentUser
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -93,8 +93,8 @@ function Signup() {
     .then((userCredential) => {
       setOpen(true);
       // Signed up 
-      var user = userCredential.user;
-      setUser(JSON.stringify(user))
+      const user = userCredential.user;
+      localStorage.setItem('user_id',JSON.stringify(user.uid));
       setLoginStatus({ msg: "Signing Up.....", authSuccess: "yes" })
     })
     .then(() => {
@@ -104,7 +104,7 @@ function Signup() {
         }, 3000)
     })
     .catch((error) => {
-      var errorMessage = error.message;
+      const errorMessage = error.message;
       setLoginStatus({ msg: errorMessage,  authSuccess: "no" })
 
     });
