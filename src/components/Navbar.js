@@ -23,7 +23,6 @@ import { getItems } from "../Api.js"
 import firebase from "firebase/app"
 
 
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -165,9 +164,15 @@ function NavBar() {
   const handleListClick = () => {
     history.push('/list');
   }
+
   const handleProfileClick = () =>{
     history.push('/profile');
   }
+
+  const handleVisitClick = () => {
+    history.push('/visit');
+  }
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (
@@ -181,7 +186,7 @@ function NavBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleVisitClick}>Visit</MenuItem>
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
 
     </Menu>
