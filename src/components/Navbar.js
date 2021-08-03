@@ -163,7 +163,10 @@ function NavBar() {
   }
 
   const handleListClick = () => {
-    history.push('/list')
+    history.push('/list');
+  }
+  const handleProfileClick = () =>{
+    history.push('/profile');
   }
 
   const menuId = 'primary-search-account-menu';
@@ -177,7 +180,7 @@ function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>My account</MenuItem>
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
 
