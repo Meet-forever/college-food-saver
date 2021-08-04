@@ -1,6 +1,6 @@
 import React from 'react'
 import NavBar from "./Navbar"
-import { CssBaseline, Grid, makeStyles, Box, Container, Button} from '@material-ui/core'
+import { CssBaseline, Grid, makeStyles, Box, Container, Button, TextField} from '@material-ui/core'
 import food from './assets/food.png';
 import food2 from './assets/food2.png';
 import food3 from './assets/food3.png';
@@ -34,13 +34,34 @@ const useStyle = makeStyles(theme => ({
         height: '300px'
     },
     footer:{
-        height: '200px',
-        width: '100%',
-        backgroundColor: 'rgb(63, 81, 181)',
-        marginTop: '20px',
+        backgroundColor: 'blue',
+        marginTop: '30px'
+    },
+    footerBox1:{
         display: 'flex',
+        justifyContent: 'center',
         alignItems: 'center',
-        padding: '0 100px 0 100px'
+        height: '200px',
+        color: 'white',
+        padding: '10px',
+        flexDirection: 'column'
+    },
+    footerBox2:{
+        display: 'flex',
+        justifyContent: 'center',
+        height: '300px',
+        alignItems: 'center',
+        flexDirection: 'column',
+        padding: '10px'
+    },
+    textfield:{
+        backgroundColor: 'white',
+        margin: '10px'
+    },
+    textfieldmessage:{
+        width: '400px',
+        backgroundColor: 'white',
+        marginBottom: '10px'
     }
 }))
 
@@ -67,7 +88,7 @@ export default function Visit() {
                                 </Grid>
                                 <Grid items  md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
-                                        <img  alt="Donate" src={food} className={classes.PhotoContain}/>
+                                        <img  alt="People Donating things" src={food} className={classes.PhotoContain}/>
                                         <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
                                     </Box>
                                 </Grid>
@@ -83,7 +104,7 @@ export default function Visit() {
                                 </Grid>
                                 <Grid items  md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
-                                        <img alt="" src={food2} className={classes.PhotoContain}/>
+                                        <img alt="Donation Bag" src={food2} className={classes.PhotoContain}/>
                                         <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
                                     </Box>
                                 </Grid>
@@ -102,8 +123,8 @@ export default function Visit() {
                                 </Grid>
                                 <Grid items  md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
-                                        <img src={food3} className={classes.PhotoContain}/>
-                                        <a alt="join Us" href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
+                                        <img alt="join Us" src={food3} className={classes.PhotoContain}/>
+                                        <a  href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
                                     </Box>
                                 </Grid>
                         </Grid>
@@ -118,19 +139,43 @@ export default function Visit() {
                                 </Grid>
                                 <Grid items  md={6} sm={12} xs={12} >
                                     <Box variant="div" alt="Security" className={classes.box}>
-                                        <img src={food4} className={classes.PhotoContain}/>
+                                        <img src={food4} alt="security assurance" className={classes.PhotoContain}/>
                                         <a href='https://www.freepik.com/vectors/clouds'>Clouds vector created by vectorjuice - www.freepik.com</a>
                                     </Box>
                                 </Grid>
                         </Grid>
                     </Grid>
             </Container>
-        <Box variant="div" className={classes.footer}>
-            <Container fixed>
-                <h1 style={{color: 'white'}}>Save Food</h1>
-            </Container>
-        </Box>
+        <Grid container md={12} sm={12} xs={12} className={classes.footer}>
+                <Grid item  md={6} sm={12} xs={12}>
+                    <div className={classes.footerBox1}>
+                        <h1>Save Food</h1>
+                        <p>And say Good Bye to Waste</p>
+                    </div>
+                </Grid>
+                <Grid item md={6} sm={12} xs={12}>
+                    <div className={classes.footerBox2}>
+                        <TextField
+                        label='Email'
+                        variant='filled'
+                        className={classes.textfield}
+                        />
+                        <TextField
+                        label='message us'
+                        multiline
+                        rows={5}
+                        variant='filled'
+                        className={classes.textfield, classes.textfieldmessage}
+                        />
+                        <div>
+                            <Button variant='contained'>Submit</Button>
+                        </div>
+                    </div>
+                </Grid>
+        </Grid>
         </Box>
         </div>
     )
 }
+
+
