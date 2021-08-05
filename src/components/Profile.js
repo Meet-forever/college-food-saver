@@ -64,6 +64,7 @@ function Profile() {
   const [phoneNum, setPhoneNum] = React.useState("1234567890");
   const [email, setEmail] = React.useState("googlemail123@gmail.com");
   const [password, setPassword] = React.useState("");
+
   const nameHandleChange = (event) => {
     setName(event.target.value);
   };
@@ -77,6 +78,43 @@ function Profile() {
   const passwordHandleChange = (event) => {
     setPassword(event.target.value);
   };
+
+// Valied Input Checker
+  const check = (inputValues) => {
+    if(inputValues[0].value === "" ){
+      window.alert("Please fill your user name.");
+    }         
+    if(inputValues[1].value === "" ){
+      window.alert("Please fill your phone Number.");
+    }
+    if(inputValues[3].value === "" ){
+      window.alert("Please fill your password.");
+    }
+    if(inputValues[0].value.length < 2){
+      window.alert("Please enter username greater than 1 character.");
+    }
+    let checkPhonenumber = /[0-9]{10}/;
+    if(inputValues[1].value.length !== 10 || !checkPhonenumber.test(inputValues[1].value)){
+      window.alert("Please enter correct phone number!")
+    }
+    let checkEmail = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if(!checkEmail.test(inputValues[2].value)){
+      window.alert("Please enter correct email id.");
+    }
+    if(inputValues[3].value.length < 8){
+      window.alert("Please enter 8 or more than 8 character password.")
+    }
+  }
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    let choice = window.confirm('Are you sure?');
+    if(!choice) return;
+    const formValue = e.target;
+    check(formValue);
+    
+  }
+
 
   return (
     <div>
@@ -121,12 +159,12 @@ function Profile() {
                 */}
         <Grid xs={12} sm={10} container item className={classes.gridChild1b}>
           <Grid item className={classes.gridChild2}>
-            <form noValidate autoComplete="off">
+            <form onSubmit={formSubmitHandler} autoComplete="off">
               <div className={classes.textfields}>
                 <FormControl variant="filled" className={classes.formcontrol}>
-                  <InputLabel htmlFor="component-filled">Name</InputLabel>
+                  <InputLabel htmlFor="component-filled-name">Name</InputLabel>
                   <FilledInput
-                    id="component-filled"
+                    id="component-filled-name"
                     value={name}
                     onChange={nameHandleChange}
                   />
@@ -134,11 +172,11 @@ function Profile() {
               </div>
               <div className={classes.textfields}>
                 <FormControl variant="filled" className={classes.formcontrol}>
-                  <InputLabel htmlFor="component-filled">
+                  <InputLabel htmlFor="component-filled-phNO">
                     Phone Number
                   </InputLabel>
                   <FilledInput
-                    id="component-filled"
+                    id="component-filled-phNo"
                     value={phoneNum}
                     onChange={phoneNumHandleChange}
                   />
@@ -146,9 +184,9 @@ function Profile() {
               </div>
               <div className={classes.textfields}>
                 <FormControl variant="filled" className={classes.formcontrol}>
-                  <InputLabel htmlFor="component-filled">Email</InputLabel>
+                  <InputLabel htmlFor="component-filled-email">Email</InputLabel>
                   <FilledInput
-                    id="component-filled"
+                    id="component-filled-email"
                     value={email}
                     onChange={emailHandleChange}
                   />
@@ -156,19 +194,19 @@ function Profile() {
               </div>
               <div className={classes.textfields}>
                 <FormControl variant="filled" className={classes.formcontrol}>
-                  <InputLabel htmlFor="component-filled">Password</InputLabel>
+                  <InputLabel htmlFor="component-filled-password">Password</InputLabel>
                   <FilledInput
-                    id="component-filled"
+                    id="component-filled-password"
                     type="password"
                     value={password}
                     onChange={passwordHandleChange}
                   />
                 </FormControl>
               </div>
-            </form>
-            <Button variant="contained" color="primary">
+              <Button variant="contained" color="primary" type="submit">
               <EditIcon fontSize="small" /> Update
             </Button>
+            </form>
           </Grid>
         </Grid>
       </Grid>

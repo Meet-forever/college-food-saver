@@ -75,7 +75,7 @@ export default function Visit() {
             <Box variant="div" className={classes.root}>
             <CssBaseline />
             <NavBar style={{position: 'absolute'}}/>
-            <Container fixed >
+            <Container fixed style={{marginTop: '30px', padding: '0 80px 0 80px'}}>
                     <Grid container direction="column">
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
@@ -158,14 +158,16 @@ export default function Visit() {
                         <TextField
                         label='Email'
                         variant='filled'
+                        required
                         className={classes.textfield}
                         />
                         <TextField
                         label='message us'
                         multiline
+                        required
                         rows={5}
                         variant='filled'
-                        className={classes.textfield, classes.textfieldmessage}
+                        className={classes.textfield && classes.textfieldmessage}
                         />
                         <div>
                             <Button variant='contained'>Submit</Button>
