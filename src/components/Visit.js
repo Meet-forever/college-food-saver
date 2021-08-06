@@ -69,6 +69,34 @@ const useStyle = makeStyles(theme => ({
 export default function Visit() {
     
     const classes = useStyle();
+    const [email, setemail] = React.useState("");
+    const [emailLabel, setEmailLabel] = React.useState("Email")
+    const [context, setcontext] = React.useState("");
+    const [validEmail, setValidEmail] = React.useState(false)
+    const emailcheck = /^[a-z0-9._\-+]+@[a-z]+\.([a-z]{2}\.)?[a-z]{2,3}$/;
+
+    const emailHandler = (e) =>{
+        setemail(e.target.value);
+    };
+    const contexthandler = (e) => {
+        setcontext(e.target.value);
+    };
+    const submitHandler = (e) => {
+         e.preventDefault();
+        if(!emailcheck.test(email)){
+            setValidEmail(true);
+            setEmailLabel("Enter a valid Email.")
+            return;
+        }
+        else{
+            setValidEmail(false);
+            setEmailLabel("Email")
+        }
+
+        //After all processing at the end
+        setemail("");
+        setcontext("")
+    }
 
     return (
         <div>
@@ -86,7 +114,7 @@ export default function Visit() {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid items  md={6} sm={12} xs={12} >
+                                <Grid item md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
                                         <img  alt="People Donating things" src={food} className={classes.PhotoContain}/>
                                         <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
@@ -102,7 +130,7 @@ export default function Visit() {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid items  md={6} sm={12} xs={12} >
+                                <Grid item md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
                                         <img alt="Donation Bag" src={food2} className={classes.PhotoContain}/>
                                         <a href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
@@ -121,7 +149,7 @@ export default function Visit() {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid items  md={6} sm={12} xs={12} >
+                                <Grid item md={6} sm={12} xs={12} >
                                     <Box variant="div" className={classes.box}>
                                         <img alt="join Us" src={food3} className={classes.PhotoContain}/>
                                         <a  href="http://www.freepik.com">Designed by pch.vector / Freepik</a>
@@ -137,7 +165,7 @@ export default function Visit() {
                                         </Box>
                                     </Box>
                                 </Grid>
-                                <Grid items  md={6} sm={12} xs={12} >
+                                <Grid item md={6} sm={12} xs={12} >
                                     <Box variant="div" alt="Security" className={classes.box}>
                                         <img src={food4} alt="security assurance" className={classes.PhotoContain}/>
                                         <a href='https://www.freepik.com/vectors/clouds'>Clouds vector created by vectorjuice - www.freepik.com</a>
@@ -146,7 +174,7 @@ export default function Visit() {
                         </Grid>
                     </Grid>
             </Container>
-        <Grid container md={12} sm={12} xs={12} className={classes.footer}>
+        <Grid container className={classes.footer}>
                 <Grid item  md={6} sm={12} xs={12}>
                     <div className={classes.footerBox1}>
                         <h1>Save Food</h1>
@@ -154,25 +182,32 @@ export default function Visit() {
                     </div>
                 </Grid>
                 <Grid item md={6} sm={12} xs={12}>
+                    <form onSubmit={submitHandler} autoComplete="off">
                     <div className={classes.footerBox2}>
                         <TextField
-                        label='Email'
+                        error={validEmail}
+                        label={emailLabel}
                         variant='filled'
                         required
+                        value={email}
                         className={classes.textfield}
+                        onChange={emailHandler}
                         />
                         <TextField
                         label='message us'
                         multiline
                         required
+                        value={context}
                         rows={5}
                         variant='filled'
+                        onChange={contexthandler}
                         className={classes.textfield && classes.textfieldmessage}
                         />
                         <div>
-                            <Button variant='contained'>Submit</Button>
+                            <Button variant='contained' type="submit">Submit</Button>
                         </div>
                     </div>
+                    </form>
                 </Grid>
         </Grid>
         </Box>
