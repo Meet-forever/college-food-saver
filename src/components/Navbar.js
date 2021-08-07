@@ -20,7 +20,6 @@ import { getItems } from "../Api.js"
 import firebase from "firebase/app"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 
-
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -159,8 +158,17 @@ function NavBar() {
   }
 
   const handleListClick = () => {
-    history.push('/list')
+    history.push('/list');
   }
+
+  const handleProfileClick = () =>{
+    history.push('/profile');
+  }
+
+  const handleVisitClick = () => {
+    history.push('/visit');
+  }
+
 
   const menuId = 'primary-search-account-menu';
   const renderMenu = (    
@@ -173,8 +181,8 @@ function NavBar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
+      <MenuItem onClick={handleVisitClick}>Visit</MenuItem>
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
 
     </Menu>

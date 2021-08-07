@@ -246,7 +246,7 @@ const Add = () => {
                             }
                         </div>
                         
-                        <div style = {{ marginTop: '90px'}}>
+                        <div style = {{ marginTop: '20px'}}>
                             <Button variant="contained" color="secondary" type="submit">Add Item</Button>
                         </div>
                     </form>
