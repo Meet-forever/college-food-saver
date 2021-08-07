@@ -80,7 +80,7 @@ function Login() {
       setOpen(true);
       // Signed in
       const user = userCredential.user;
-      localStorage.setItem('user_id',JSON.stringify(user.uid));
+      localStorage.setItem('auth_id',JSON.stringify(user.uid));
       setLoginStatus({ msg: "Signing In.....", authSuccess: "yes" })
 
     })

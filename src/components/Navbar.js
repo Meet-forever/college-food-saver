@@ -125,7 +125,7 @@ function NavBar() {
     })
 
     try {
-      localStorage.setItem("user_id", "NOACTIVEUSER")
+      localStorage.setItem("auth_id", "NOACTIVEUSER")
       history.push("/login")
     } catch {
       setError("Failed to log out!")
@@ -165,9 +165,6 @@ function NavBar() {
     history.push('/profile');
   }
 
-  const handleVisitClick = () => {
-    history.push('/visit');
-  }
 
 
   const menuId = 'primary-search-account-menu';
@@ -182,7 +179,6 @@ function NavBar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleProfileClick}>Profile</MenuItem>
-      <MenuItem onClick={handleVisitClick}>Visit</MenuItem>
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
 
     </Menu>

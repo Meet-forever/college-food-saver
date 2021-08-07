@@ -224,7 +224,7 @@ const Add = () => {
                                 <label htmlFor="icon-button-file">
                                     <Button
                                         variant="contained"
-                                        color="primary"
+                                        color="secondary"
                                         aria-label="upload picture" component="span"
                                         className={classes.button}
                                         startIcon={<ImageIcon />}
@@ -246,8 +246,8 @@ const Add = () => {
                             }
                         </div>
                         
-                        <div style = {{ marginTop: '20px'}}>
-                            <Button variant="contained" color="secondary" type="submit">Add Item</Button>
+                        <div style = {{ marginTop: '50px'}}>
+                            <Button variant="contained" color="primary" type="submit">Add Item</Button>
                         </div>
                     </form>
                 }
