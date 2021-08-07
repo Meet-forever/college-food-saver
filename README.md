@@ -6,7 +6,7 @@ College Food Saver app thrives in reducing food waste from college dining halls 
 
 This app can save 22+ million pounds of food waste and also helps students in getting free meals.
 
-## How it works ? Tech Stack ?
+### How it works ? Tech Stack ?
 
 The app is currently built using <code>React.js</code>, <code>Material-UI Framework</code>, <code>Node.js</code>, <code>Express.js</code>, <code>MongoDB</code>, <code>Firebase</code>, <code>Google Cloud Platform</code>. The frontend of the app is hosted using <code>Firebase Hosting</code> and the backend is hosted on <code>Google App Engine's</code> serveless architecture.
 
@@ -14,7 +14,7 @@ The app is currently built using <code>React.js</code>, <code>Material-UI Framew
 
 The app uses Firebase authentication to authenticate users with specific domain to create/signin there accounts. A unique UID is stored as a key in the localStorage of the browser to allow user to access the app across different tabs while logged in to there respective accounts. This unique UID gets expired after every 5 hours and the user needs to login again to ensure the security of the user's data. In addition, every time a new account is created user's data is stored in the Firebase Realtime Database which is used by app.
 
-## Main App
+### Main App
 
 After an user creates an account in the client view the home/metrics page appears which gives some quick weekly and yearly insights using graphical representation. This data can be used by the dining halls to anaylze the data and improve there service by making it widespread. This page also serves as a motivation for the dining hall department as it shows there impact on society for good cause.
 
@@ -23,7 +23,7 @@ The other links are to see the current listing with the food items posted with t
 <img width="1388" alt="Screen Shot 2021-08-07 at 7 41 38 PM" src="https://user-images.githubusercontent.com/56787472/128616381-b48b8a68-9d42-41a2-98f0-08e398a095b6.png">
 
 
-## GCP Cloud Tasks API
+### GCP Cloud Tasks API
 
 To remove the redundancy and improve user experience items in the listing are deleting autmatically by the Cloud Tasks API. So every time a new item is added to the listing a new task is added to the <code>deletion-process-queue</code> which deletes the item as the clock hits that time. A DELETE request is sent to the backend serverless Api hosted in Google App Engine which deletes the item from the database.
 
