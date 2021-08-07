@@ -76,15 +76,12 @@ const Add = () => {
         db.collection("itemImages").doc("ShrxjbmoybsOhYTeVkNZ").get()
         .then((doc) => {
             if (doc.exists) {
-
-            itemObj = {title: itemName, description: itemDescription, date: expiryDate, calories: calories, fats: fats, carbs: carbs, protiens: protiens,
-            requested: false, r_accepted: false, itemImageURL: doc.data().images[ doc.data().images.length - 1 ].url }
-            createItem(itemObj)
-            setLoading(false);  
-            history.push('/list')   
-
+                itemObj = {title: itemName, description: itemDescription, date: expiryDate, calories: calories, fats: fats, carbs: carbs, protiens: protiens,
+                requested: false, r_accepted: false, itemImageURL: doc.data().images[ doc.data().images.length - 1 ].url }
+                createItem(itemObj)
+                setLoading(false);  
+                history.push('/list')   
             } else {
-                // doc.data() will be undefined in this case
                 console.log("No such document!");
             }
         })
@@ -175,6 +172,7 @@ const Add = () => {
                             />
                             <TextField
                                 required
+                                InputProps={{ inputProps: { min: 0, max: 10 } }}
                                 id="calories"
                                 label="Calories"
                                 type="number"
@@ -219,10 +217,6 @@ const Add = () => {
                         </div>
 
                         <div>  
-                            {/* <label htmlFor="image">Upload Image</label>
-                            <input type="file" id="image"
-                                name="image" required onChange={onFileChange} 
-                            /> */}
                             
                             { file === undefined ? 
                             <div>
@@ -230,7 +224,7 @@ const Add = () => {
                                 <label htmlFor="icon-button-file">
                                     <Button
                                         variant="contained"
-                                        color="default"
+                                        color="primary"
                                         aria-label="upload picture" component="span"
                                         className={classes.button}
                                         startIcon={<ImageIcon />}

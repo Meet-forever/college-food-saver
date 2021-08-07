@@ -4,11 +4,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -18,10 +16,9 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import { useHistory } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
 import { deepOrange } from '@material-ui/core/colors';
-import logo from './assets/navbarlogo.png'
 import { getItems } from "../Api.js"
 import firebase from "firebase/app"
-
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -113,7 +110,6 @@ function NavBar() {
     const fetchItems = async () => {
       const newItems = await getItems()
       setItemsNotificationCount(newItems.length)
-
     }
     fetchItems()
   }, [])
@@ -167,7 +163,7 @@ function NavBar() {
   }
 
   const menuId = 'primary-search-account-menu';
-  const renderMenu = (
+  const renderMenu = (    
     <Menu
       anchorEl={anchorEl}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -195,8 +191,8 @@ function NavBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
-        <IconButton aria-label="add items" color="inherit" onClick={handleHomeClick}>
+      <MenuItem onClick={handleHomeClick}>
+        <IconButton aria-label="add items" color="inherit">
           <Badge color="secondary">
             <HomeIcon />
           </Badge>
@@ -204,28 +200,27 @@ function NavBar() {
         <p>Home</p>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label="show 0 new notifications" color="inherit">
+          <Badge badgeContent={0} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
         <p>Notifications</p>
       </MenuItem>
-      <MenuItem>
-        <IconButton aria-label="show 2 active items" color="inherit" onClick={handleListClick}>
+      <MenuItem  onClick={handleListClick}>
+        <IconButton aria-label="show 2 active items" color="inherit">
           <Badge badgeContent={itemsNotificationCount} color="secondary">
             <ListAltIcon />
           </Badge>
         </IconButton>
         <p>Listing</p>
       </MenuItem>
-       <MenuItem onClick={handleProfileMenuOpen}>
+       <MenuItem onClick={handleAddClick}>
         <IconButton
           aria-label="account of current user"
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
-          color="inherit"
-          onClick={handleAddClick}>
+          color="inherit">
           <AddBoxIcon />
         </IconButton>
         <p>Add New Item</p>
@@ -248,23 +243,12 @@ function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
-          <Avatar variant="square"  edge="start" className={classes.square} src={logo} style= {{ marginRight: '15px', borderRadius: '20px'}} ></Avatar>
+          <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#14b814'}}>
+            <FastfoodIcon style={{fill: '#786010'}} />
+          </Avatar>
           <Typography className={classes.title} variant="h6" noWrap >
             Save Food
           </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
-            </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </div>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Add Items" color="inherit" onClick={handleHomeClick}>
@@ -272,8 +256,8 @@ function NavBar() {
                 <HomeIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+            <IconButton aria-label="show 0 new notifications" color="inherit">
+              <Badge badgeContent={0} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>

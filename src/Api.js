@@ -2,10 +2,10 @@
 
 // gets all of the items in the database
 // fetching data from the backend using the PORT = 4000
-export const getItems = () => fetch("http://localhost:4000/").then(res => res.json())
+export const getItems = () => fetch("https://college-food-saver-app.ue.r.appspot.com/").then(res => res.json())
 
 // creates a item in a database 
-export const createItem = (item) => fetch("http://localhost:4000/create", {
+export const createItem = (item) => fetch("https://college-food-saver-app.ue.r.appspot.com/create", {
   method: "POST",
   headers: {
     "Accept": "application/json",
@@ -15,7 +15,7 @@ export const createItem = (item) => fetch("http://localhost:4000/create", {
 })  
 
 // creates a item in a database 
-export const createUser = (user) => fetch("http://localhost:4000/signup", {
+export const createUser = (user) => fetch("https://college-food-saver-app.ue.r.appspot.com/signup", {
   method: "POST",
   headers: {
     "Accept": "application/json",
@@ -25,13 +25,13 @@ export const createUser = (user) => fetch("http://localhost:4000/signup", {
 })
 
 // login a user database 
-export const loginUser = (email) => fetch(`http://localhost:4000/login/${email}`)
+export const loginUser = (email) => fetch(`https://college-food-saver-app.ue.r.appspot.com/login/${email}`)
 .then(res => {
   return res.json();
   })
 
 // can update a single item 
-export const updateItem = (item, id) => fetch(`http://localhost:4000/${id}`, {
+export const updateItem = (item, id) => fetch(`https://college-food-saver-app.ue.r.appspot.com/${id}`, {
   method: "POST",
   headers: {
     "Accept": "application/json",
@@ -40,7 +40,7 @@ export const updateItem = (item, id) => fetch(`http://localhost:4000/${id}`, {
   body: JSON.stringify(item)
 })  
 
-export const deleteItem = (id) => fetch(`http://localhost:4000/item/${id}`, {
+export const deleteItem = (id) => fetch(`https://college-food-saver-app.ue.r.appspot.com/item/${id}`, {
   method: "DELETE",
   headers: {
     "Accept": "application/json",
@@ -48,4 +48,4 @@ export const deleteItem = (id) => fetch(`http://localhost:4000/item/${id}`, {
   },
 })
 // get a single item by providing a id 
-export const getItem = (id) => fetch(`http://localhost:4000/${id}`).then(res => res.json())
+export const getItem = (id) => fetch(`https://college-food-saver-app.ue.r.appspot.com/${id}`).then(res => res.json())

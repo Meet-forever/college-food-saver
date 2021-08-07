@@ -5,10 +5,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { Link } from "react-router-dom";
 import Avatar from '@material-ui/core/Avatar';
-import logo from './assets/navbarlogo.png'
 import ErrorIcon from '@material-ui/icons/Error';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -34,7 +34,9 @@ function NoPathMatch() {
     <div className={classes.grow}>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
-          <Avatar variant="square"  edge="start" className={classes.square} src={logo} style= {{ marginRight: '15px', borderRadius: '20px'}} ></Avatar>
+          <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#14b814'}}>
+            <FastfoodIcon style={{fill: '#786010'}} />
+          </Avatar>
           <Typography className={classes.title} variant="h6" noWrap >
             Save Food
           </Typography>
