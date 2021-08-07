@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 // structure of the database can be altered from here 
-
 const Item = mongoose.Schema({
   title: {
     type: String,

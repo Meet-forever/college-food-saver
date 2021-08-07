@@ -1,10 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
@@ -20,7 +18,7 @@ import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Fade from '@material-ui/core/Fade';
 import firebase from "firebase/app"
-import { AuthContext } from '../../context/AuthContext';
+require('firebase/database');
 
 
 
@@ -75,39 +73,53 @@ function Signup() {
   const classes = useStyles();
   const emailRef = useRef()
   const passwordRef = useRef()
-  const passwordConfirmRef = useRef()
+  const firstNameRef = useRef()
+  const lastNameRef = useRef()
   const history = useHistory()
   const [ loginStatus, setLoginStatus ] = useState({})
   const [open, setOpen] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  const [ user, setUser ] = currentUser
 
   async function handleSubmit(e) {
     e.preventDefault()
 
-    // if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-    //   return setError("Passwords do not match")
-    // }
+    const domain = emailRef.current.value.match(/(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/g)[0].substring(emailRef.current.value.length - 7, emailRef.current.value.length)
+    if(firstNameRef.current.value.length !== 0 && lastNameRef.current.value.length !== 0 && 
+      emailRef.current.value.length !== 0 && passwordRef.current.value.length !== 0){
 
-    firebase.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
-    .then((userCredential) => {
-      setOpen(true);
-      // Signed up 
-      var user = userCredential.user;
-      setUser(JSON.stringify(user))
-      setLoginStatus({ msg: "Signing Up.....", authSuccess: "yes" })
-    })
-    .then(() => {
-        setTimeout(() => {
-            setOpen(false);
-            history.push("/")
-        }, 3000)
-    })
-    .catch((error) => {
-      var errorMessage = error.message;
-      setLoginStatus({ msg: errorMessage,  authSuccess: "no" })
+      if(domain === "gsu.edu"){
+          firebase.auth().createUserWithEmailAndPassword(emailRef.current.value, passwordRef.current.value)
+          .then((userCredential) => {
+            setOpen(true);
+            // Signed up 
+            const user = userCredential.user;
+            firebase.database().ref('users/' + user.uid ).set({
+              Firstname:firstNameRef.current.value,
+              Lastname:lastNameRef.current.value,
+              Email: emailRef.current.value,
+              Password: passwordRef.current.value
+            })
+            .then(() => {
+              localStorage.setItem('auth_id',JSON.stringify(user.uid));
+              setLoginStatus({ msg: "Signing Up.....", authSuccess: "yes" })
+              setTimeout(() => {
+                setOpen(false);
+                history.push("/")
+              }, 2000)
+            })
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            setLoginStatus({ msg: errorMessage,  authSuccess: "no" })
 
-    });
+          });
+        }else{
+          setLoginStatus({ msg: "Please use @gsu.edu email!",  authSuccess: "no" })
+        }
+
+    }
+    else{
+      setLoginStatus({ msg: "Please fill all of the fields!",  authSuccess: "no" })
+    }
   }
 
   return (
@@ -116,7 +128,7 @@ function Signup() {
       
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
+          <Avatar className ={classes.avatar}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -125,6 +137,31 @@ function Signup() {
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             { loginStatus.authSuccess === "yes" && <Alert severity="success"> { loginStatus.msg }</Alert> }
             { loginStatus.authSuccess === "no" && <Alert severity="error"> { loginStatus.msg }</Alert> }
+            
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="text"
+              id="firstname"
+              label="First Name"
+              name="firstname"
+              autoFocus
+              inputRef={firstNameRef}
+            />
+
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="lastname"
+              label="Last Name"
+              name="text"
+              autoFocus
+              inputRef={lastNameRef} 
+            />
 
             <TextField
               variant="outlined"
@@ -150,10 +187,6 @@ function Signup() {
               autoComplete="current-password"
               inputRef={passwordRef} 
             />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
             <Button
               type="submit"
               fullWidth
@@ -163,14 +196,14 @@ function Signup() {
             >
               {loginStatus.authSuccess === "yes"  ? <CircularProgress color="secondary"/>  : "Sign Up" }
             </Button>
-            <Grid container>
-              <Grid item xs>
+            <Grid container style= {{ display: 'flex',  justifyContent: 'space-between'}}>
+              <Grid item >
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Forgot password ?
                 </Link>
               </Grid>
               <Grid item>
-                <span>Already have an account ?</span>
+                <span>Already have an account ? </span>
                 <Link href="/login" variant="body2">
                   {"Login"}
                 </Link>
@@ -206,7 +239,6 @@ function Signup() {
       </Modal>
         </div>
       </Grid>
-      
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       
     </Grid>    
