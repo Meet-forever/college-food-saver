@@ -38,6 +38,7 @@ import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { deleteItem } from '../Api'
+import { spacing } from '@material-ui/system';
 
 
 const columns = [
@@ -58,7 +59,6 @@ function createData(name, description, calories, fat, carbs, protein, date) {
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    height: 340
   },
   container: {
     maxHeight: 440,
@@ -161,14 +161,14 @@ function List() {
   return (
     <div>
       <NavBar />
-        <div style={{ marginTop: '35px', marginBottom: '50px',paddingLeft: '50px', paddingRight:'50px' }}>
-            <Box p={3} style= {{ marginBottom: '20px', border: '1px dashed grey', borderRadius:'50px'  }} >
+        <Container style={{ marginTop: '30px', marginBottom: '20px'}} >
+            <Box p={3} style= {{ marginBottom: '20px', border: '1px solid lightgrey', borderRadius:'5px'  }} >
               <Typography variant="h4" >
                   Items
               </Typography>
             </Box>
             <ToggleButtonGroup orientation="horizontal" value={view} exclusive onChange={handleChange}
-              style={{ display: 'flex', justifyContent: 'flex-end', marginRight: '40px'}}>
+              style={{ display: 'flex', justifyContent: 'flex-end'}}>
                 <ToggleButton value="list" aria-label="list">
                     <ViewListIcon />
                 </ToggleButton>
@@ -176,7 +176,7 @@ function List() {
                     <ViewModuleIcon />
                 </ToggleButton> 
             </ToggleButtonGroup>
-        </div>
+        </Container>
            
     <div className={classes.root} >
       
@@ -187,8 +187,8 @@ function List() {
         <Grid container spacing={2}>
           {
                 items.filter(filteredItems => filteredItems.r_accepted === false ).map(item => (
-                <Grid item xs={6} sm={3} key={item._id}>
-                  <Card className={classes.root}>
+                <Grid item xs={12} md={4} sm={6} key={item._id}>
+                  <Card className={classes.root} >
                     <CardActionArea>
                         <CardMedia
                         className={classes.media}
@@ -197,7 +197,7 @@ function List() {
                         title={ item.title }
                         onLoad={ onImageLoad } 
                         />
-                        <CardContent>
+                        <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start'}}>
                               <Typography gutterBottom variant="h5" component="h2">
                                   {item.title}
                               </Typography>
@@ -206,9 +206,7 @@ function List() {
                               </Typography>
                         </CardContent>
 
-                    </CardActionArea>
-                      
-                      <CardActions disableSpacing> 
+                        <CardActions> 
                           <AccessAlarmIcon style= {{ marginRight: '6px', fill: 'darkred'}} />
                           <Typography variant="body1" style={{ color:'darkRed' }} >
                           {new Date(item.date).toLocaleDateString()} { new Date(item.date).toLocaleTimeString()}
@@ -227,18 +225,11 @@ function List() {
                         }
                         
                       </CardActions>
+                    </CardActionArea>
                   </Card>
                 </Grid>
                 ))
           }
-          
-            <Grid item xs={6} sm={3}>
-              <Box  borderRadius={5} pt={17} style={{ height: '199px', border: '1px dashed grey' }} borderColor="grey.400">
-                <IconButton onClick={handleAddClick}>
-                  <AddBoxIcon fontSize='large'/>
-                </IconButton>
-              </Box>
-            </Grid>
           </Grid>
         }
         </Container>

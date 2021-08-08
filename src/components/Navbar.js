@@ -19,6 +19,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import { getItems } from "../Api.js"
 import firebase from "firebase/app"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -29,7 +30,6 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   title: {
-    display: 'none',
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
@@ -84,7 +84,6 @@ const useStyles = makeStyles((theme) => ({
     },
     square: {
     color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
     padding: 20
   },
   },
@@ -247,12 +246,14 @@ function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
+          <Link style={{ display: 'flex', alignItems: 'center', textDecoration: "none", color: 'white'}} to={'/login'}>
           <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#14b814'}}>
             <FastfoodIcon style={{fill: '#786010'}} />
           </Avatar>
           <Typography className={classes.title} variant="h6" noWrap >
             Save Food
           </Typography>
+          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Add Items" color="inherit" onClick={handleHomeClick}>
