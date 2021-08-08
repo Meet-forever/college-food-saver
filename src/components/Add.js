@@ -18,16 +18,17 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    "& > *": {
-      margin: theme.spacing(1)
-    },
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '250px',
     },
     input: {
         display: "none"
     },
+  },
+  cont:{
+    marginTop: '30px', 
+    marginBottom: '20px'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -37,6 +38,10 @@ const useStyles = makeStyles((theme) => ({
   input: {
         display: 'none',
   },
+  uploadBtn: {
+    width: '250px', 
+    height:'47px'
+  }
 }));
 
 const db = app.firestore()
@@ -127,15 +132,15 @@ const Add = () => {
     return (
         <div>
             <NavBar />
-                <Container maxWidth="lg" >
+                <Container maxWidth="lg" className={classes.cont}>
                 { loading ? 
                     <Box mt={30} >
                         <h2>Adding Item....</h2> 
                         <CircularProgress />
                     </Box>
                     :
-                    <form className={classes.root} onSubmit={submitHandler} style={{ marginTop: '35px'}}>
-                        <Box p={3} style= {{ marginBottom: '30px', border: '1px dashed grey', borderRadius:'50px'  }} >
+                    <form className={classes.root} onSubmit={submitHandler}>
+                        <Box p={3} style={{ border: '1px solid lightgrey', borderRadius:'5px', marginBottom: '20px'  }} >
                             <Typography variant="h4" >
                                 Add Item
                             </Typography>
@@ -226,7 +231,7 @@ const Add = () => {
                                         variant="contained"
                                         color="secondary"
                                         aria-label="upload picture" component="span"
-                                        className={classes.button}
+                                        className={classes.uploadBtn}
                                         startIcon={<ImageIcon />}
                                         required
                                     >
@@ -247,7 +252,7 @@ const Add = () => {
                         </div>
                         
                         <div style = {{ marginTop: '50px'}}>
-                            <Button variant="contained" color="primary" type="submit">Add Item</Button>
+                            <Button variant="contained" color="primary" type="submit" style={{ width: 'calc(12vw + 300px)', height:'53px' }}>Add Item</Button>
                         </div>
                     </form>
                 }

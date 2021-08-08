@@ -6,6 +6,7 @@ import Box from '@material-ui/core/Box';
 import NavBar from './Navbar'
 import { getItems } from "../Api.js"
 import LinearProgress from '@material-ui/core/LinearProgress';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -114,72 +115,57 @@ useEffect(() => {
 
   
   return (
-
- 
-
       <div>
       <NavBar />
 
       <div className={classes.root}>
         
       <Grid container  direction="row" justify="center" alignItems="center">
-        <Grid item xs={5}>
+        <Grid item xs={12} sm={11} md={5}>
           <Box mt={10}>
-          <h1>Weekly Insights</h1>
+          <Typography variant="h4">
+            Weekly Insights
+          </Typography>
           <ReactEcharts
-            option = {{
-              tooltip: {
-                  trigger: 'item'
-              },
-              legend: {
-                   orient: 'vertical',
-                   left: 'left',
-                   
-              },
-              series: [
-                  {
-                      name: 'Insights',
-                      type: 'pie',
-                      radius: ['40%', '100%'],
-                      avoidLabelOverlap: false,
-                      itemStyle: {
-                          borderRadius: 10,
-                          borderColor: '#fff',
-                          borderWidth: 2
-                      },
-                      label: {
-                          show: false,
-                          position: 'center'
-                      },
-                      emphasis: {
-                          label: {
-                              show: true,
-                              fontSize: '13',
-                              fontWeight: 'bold'
-                          }
-                      },
-                      labelLine: {
-                          show: false
-                      },
-                      data: [
-                          {value: 1048, name: 'Total Food Saved'},
-                          {value: 735, name: 'Total Served this week'},
-                          {value: 580, name: 'Environmental Impact'},
-                          {value: 484, name: 'Items to be Listed'},
-                      ]
-                  }
-              ]
-          }}
+             
+             option = {{              
+                        tooltip: {
+                            trigger: 'item'
+                        },
+                        series: [
+                            {
+                                name: 'Insights',
+                                type: 'pie',
+                                radius: '85%',
+                                data: [
+                                    {value: 1048, name: 'Food \n Saved'},
+                                    {value: 735, name: 'This week count'},
+                                    {value: 484, name: 'New \n Items'},
+                                    {value: 580, name: 'Environmental \n Impact'},
+                                ],
+                                emphasis: {
+                                    itemStyle: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                    }
+                                }
+                            }
+                        ]
+          }} 
+          
           />
       </Box>
         </Grid>
-        <Grid item xs={4}>
-          <h1>Total Orders</h1>
-          <Box  border={1} borderRadius={5} p={10}>
-          <h1>{ loading ? <LinearProgress /> :totalOrders}</h1>
+        <Grid item xs={7} sm={6} md={3} style={{ marginTop: '42px'}}>
+          <Typography variant="h4">
+              Total Orders
+          </Typography>
+          <Box  border={1} borderRadius={5} p={10} mt={2}>
+            <h1>{ loading ? <LinearProgress /> :totalOrders}</h1>
           </Box>
         </Grid>
-        <Grid item xs={9} style = {{ marginTop: '20px'}}>
+        <Grid item xs={9} style = {{ marginTop: '40px'}}>
           <ReactEcharts
             option = {{
               tooltip: {
@@ -191,6 +177,9 @@ useEffect(() => {
               title: {
                   left: 'center',
                   text: 'Total Food Save Over An Year',
+                  textStyle:{
+                    fontSize: 14
+                  }
               },
               toolbox: {
                   feature: {

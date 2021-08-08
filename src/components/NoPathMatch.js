@@ -49,7 +49,7 @@ function NoPathMatch() {
             Page not found! Please Login or Signup.
         </Typography>
       </Box>
-      <Link to={'/login'} size="small" color="primary">
+      <Link to={'/login'} size="small" color="primary" >
         <Button color="primary" variant="contained" style={{ marginTop: '15px'}} >Log In</Button>
       </Link>
       <Link to={'/signup'} size="small" color="primary" style={{ marginLeft: '10px'}} >
