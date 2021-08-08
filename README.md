@@ -20,18 +20,20 @@ After an user creates an account in the client view the home/metrics page appear
 
 The other links are to see the current listing with the food items posted with the items details like fats, carbs, expiry date, etc. Supervisors in the dining hall can add a new item using the add icon. All of the text data related to listings and new orders are stored in Mongo database. Images related to items are stored in the Firebase Storage.
 
-<img width="1388" alt="Screen Shot 2021-08-07 at 7 41 38 PM" src="https://user-images.githubusercontent.com/56787472/128616381-b48b8a68-9d42-41a2-98f0-08e398a095b6.png">
+<img width="1440" alt="Screen Shot 2021-08-08 at 1 11 33 PM" src="https://user-images.githubusercontent.com/56787472/128639936-f0ae9ae1-fd7b-483c-81b0-37d75c8ceebe.png">
 
+### Google Cloud Platform's SDK for Cloud Tasks API
 
-### GCP Cloud Tasks API
-
-To remove the redundancy and improve user experience items in the listing are deleting autmatically by the Cloud Tasks API. So every time a new item is added to the listing a new task is added to the <code>deletion-process-queue</code> which deletes the item as the clock hits that time. A DELETE request is sent to the backend serverless Api hosted in Google App Engine which deletes the item from the database.
+To remove the redundancy and improve user experience items in the listing are deleted automatically by the Cloud Tasks API. So every time a new item is created, a new tasks is added to the <code>deletion-process-queue</code> which deletes the item as the clock hits that time. A HTTP DELETE request is sent to the backend serverless Api hosted in Google App Engine which deletes the item from the mongo database.
 
 <img width="1343" alt="Screen Shot 2021-08-07 at 7 40 43 PM" src="https://user-images.githubusercontent.com/56787472/128616367-66f71287-f0d3-46fe-9dc7-2b5544c93486.png">
 
+
+
 ## Architecture/ WireFrame
 
-<img width="1182" alt="Screen Shot 2021-08-07 at 11 30 01 PM" src="https://user-images.githubusercontent.com/56787472/128619789-03ba3f8b-ce1e-46c9-81a6-0a99686a1e69.png">
+<img width="1166" alt="Screen Shot 2021-08-08 at 1 16 28 PM" src="https://user-images.githubusercontent.com/56787472/128640065-d06eda7e-3d75-4989-b31e-e3d6b7a4204f.png">
+
 
 
 ## Instructions
@@ -44,10 +46,14 @@ To remove the redundancy and improve user experience items in the listing are de
 
 Note: You might need to install Node on your local machine if it's already not installed.
 
+## Current Version
+client - ``` v1.3 ``` <br>
+customer - ``` v1.0 ```
+
 ## Contributors
 
 <a href="https://github.com/ayushbudh/college-food-saver/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=ayushbudh/college-food-saver" />
 </a>
 
-Made with [contributors-img](https://contrib.rocks).
+Made with [contributors-img](https://contrib.rocks). Feel free to contribute!
