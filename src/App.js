@@ -7,6 +7,8 @@ import List from './components/List.js'
 import Add from './components/Add.js'
 import NoPathMatch from './components/NoPathMatch'
 import Profile from './components/Profile';
+//import Visit from './components/Visit'
+//import LandingPage from './components/LandingPage';
 
 const ProtectedRoute = (props) => {
   return(
