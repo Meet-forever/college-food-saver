@@ -10,6 +10,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import EcoIcon from '@material-ui/icons/Eco';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles(theme => ({
     root:{
@@ -19,7 +20,7 @@ const useStyle = makeStyles(theme => ({
         top: '0',
         position: 'fixed',
         width: '100%',
-        padding: '0 10%',
+        padding: '0 5%',
         display: 'flex',
         height: '10vh',
         justifyContent:'space-between',
@@ -27,17 +28,22 @@ const useStyle = makeStyles(theme => ({
         backgroundColor: '#3f51b5',
         zIndex: '10'
     },
+    navBtnContainer:{
+        display: 'flex',
+        alignItems: 'center'
+    },
     navbtn:{
-        marginLeft: '20px'
+        margin: '2px'
     },
     banner:{
         position: 'relative',
-        top:'10vh',
+        top: '60px',
         height: '90vh',
         width: '100%',
         backgroundColor: 'black',
         backgroundImage: `url(${bannerPicture})`,
         backgroundPosition: 'center',
+        backgroundSize: 'contain',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -93,7 +99,7 @@ const useStyle = makeStyles(theme => ({
     },
     boxText:{
         display: 'flex',
-        justifyContent: 'space-around',
+        justifyContent: 'flex-end',
         flexDirection: 'column',
         padding: '0 30px 0 30px'
     },
@@ -101,11 +107,12 @@ const useStyle = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '300px'
+        height: '250px',
+        padding: '10px'
     },
     footer:{
         backgroundColor: '#3f51b5',
-        marginTop: '30px'
+        marginTop: '100px'
     },
     footerBox1:{
         display: 'flex',
@@ -150,6 +157,8 @@ export default function Visit() {
     const [context, setcontext] = React.useState("");
     const [validEmail, setValidEmail] = React.useState(false)
     const emailcheck = /^[a-z0-9._\-+]+@[a-z]+\.([a-z]{2}\.)?[a-z]{2,3}$/;
+    const history = useHistory();
+
 
     const emailHandler = (e) =>{
         setemail(e.target.value);
@@ -168,10 +177,15 @@ export default function Visit() {
             setValidEmail(false);
             setEmailLabel("Email")
         }
-
         //After all processing at the end
         setemail("");
         setcontext("")
+    }
+    const signInHandler = () =>{
+        history.push('./login');
+    }
+    const signUpHandler = () =>{
+        history.push('./signup');
     }
 
     return (
@@ -185,9 +199,9 @@ export default function Visit() {
                 <Box component="div" className={classes.header}>
                     <Typography variant="h4" style={{fontWeight: '900px', color: 'white'}}>Save Food</Typography>
                 </Box>
-                <Box component='div'>
-                    <Button variant="contained" size='small' className={classes.navbtn}>Sign up</Button>
-                    <Button variant="contained" size="small" color="secondary" className={classes.navbtn}>Sign In</Button>
+                <Box component='div' className={classes.navBtnContainer}>
+                    <Button variant="contained" size='small' className={classes.navbtn} onClick={signUpHandler}>Sign up</Button>
+                    <Button variant="contained" size="small" color="secondary" className={classes.navbtn} onClick={signInHandler}>Sign In</Button>
                 </Box>
             </Box>
 
@@ -205,7 +219,7 @@ export default function Visit() {
                                 </span>
                                 <br/>
                                 <p >
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                                 </p>
                         </Box>
                         <Box component="div" className={classes.bannerContent2}>
@@ -228,8 +242,8 @@ export default function Visit() {
             </Box>
 
             {/* Content and Information */}
-            
-            <Container fixed style={{marginTop: '100px', padding: '0 80px 0 80px'}}>
+            <Box style={{position: 'relative', minHeight: '100vh', top: '100px'}}>
+            <Container fixed>
                     <Grid container direction="column">
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
@@ -295,6 +309,8 @@ export default function Visit() {
                         </Grid>
                     </Grid>
             </Container>
+        </Box>
+        {/* Footer Starts here */}
         <Grid container className={classes.footer}>
                 <Grid item  md={6} sm={12} xs={12}>
                     <div className={classes.footerBox1}>

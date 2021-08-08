@@ -30,6 +30,7 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
+        {/* <Route component={Visit} exact path ="/visit" /> */}
         <LoginSignUpRollBackRoute exact path="/login" component={Login} />
         <LoginSignUpRollBackRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/home" component={Home}/>
