@@ -12,7 +12,7 @@ The app is currently built using <code>React.js</code>, <code>Material-UI Framew
 
 ### User Authentication
 
-The app uses Firebase authentication to authenticate users with specific domain to create/signin there accounts. A unique UID is stored as a key in the localStorage of the browser to allow user to access the app across different tabs while logged in to there respective accounts. This unique UID gets expired after every 5 hours and the user needs to login again to ensure the security of the user's data. In addition, every time a new account is created user's data is stored in the Firebase Realtime Database which is used by app.
+The app uses Firebase authentication to authenticate users with specific domain (@gsu.edu) to create/signin there accounts. A unique UID is stored as a key in the localStorage of the browser to allow user to access the app across different tabs while logged in to there respective accounts. This unique UID gets expired after every 5 hours and the user needs to login again to ensure the security of the user's data. In addition, every time a new account is created user's data is stored in the Firebase Realtime Database which is used by app.
 
 ### Main App
 
