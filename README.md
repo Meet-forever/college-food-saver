@@ -31,7 +31,8 @@ To remove the redundancy and improve user experience items in the listing are de
 
 ## Architecture/ WireFrame
 
-<img width="666" alt="Screen Shot 2021-07-11 at 10 02 00 PM" src="https://user-images.githubusercontent.com/56787472/125219897-bafaca80-e293-11eb-9495-29e9f35cc3d0.png">
+<img width="1182" alt="Screen Shot 2021-08-07 at 11 30 01 PM" src="https://user-images.githubusercontent.com/56787472/128619789-03ba3f8b-ce1e-46c9-81a6-0a99686a1e69.png">
+
 
 ## Instructions
 
@@ -42,3 +43,11 @@ To remove the redundancy and improve user experience items in the listing are de
 5. Finally run command ```npm start``` within the root of the project to start the local server in port 3000.
 
 Note: You might need to install Node on your local machine if it's already not installed.
+
+## Contributors
+
+<a href="https://github.com/ayushbudh/college-food-saver/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ayushbudh/college-food-saver" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
