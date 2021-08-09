@@ -1,5 +1,5 @@
 import React from 'react'
-import { CssBaseline, Grid, makeStyles, Box, Container, Button, TextField, Typography, IconButton, Paper} from '@material-ui/core'
+import { CssBaseline, Grid, makeStyles, Box, Container, Button, TextField, Typography, IconButton, Paper, Avatar} from '@material-ui/core'
 import food from './assets/food.png';
 import food2 from './assets/food2.png';
 import food3 from './assets/food3.png';
@@ -10,6 +10,7 @@ import TwitterIcon from '@material-ui/icons/Twitter';
 import EcoIcon from '@material-ui/icons/Eco';
 import LocalDiningIcon from '@material-ui/icons/LocalDining';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { useHistory } from "react-router-dom";
 
 const useStyle = makeStyles(theme => ({
@@ -25,8 +26,12 @@ const useStyle = makeStyles(theme => ({
         height: '10vh',
         justifyContent:'space-between',
         alignItems: 'center',
-        backgroundColor: '#3f51b5',
+        backgroundColor: '#002884',
         zIndex: '10'
+    },
+    header:{
+        display: 'flex',
+        alignItems: 'center'
     },
     navBtnContainer:{
         display: 'flex',
@@ -107,25 +112,26 @@ const useStyle = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '250px',
-        padding: '10px'
+        height: '90%',
+        padding: '25px',
+        overflow: 'hidden'
     },
     footer:{
-        backgroundColor: '#3f51b5',
-        marginTop: '100px'
+        backgroundColor: '#002884',
+        marginTop: '120px'
     },
     footerBox1:{
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '300px',
+        height: '320px',
         color: 'white',
         padding: '10px',
         flexDirection: 'column'
     },
     footerBox2:{
         display: 'flex',
-        height: '300px',
+        height: '320px',
         alignItems: 'center',
         flexDirection: 'column',
         padding: '10px',
@@ -197,7 +203,10 @@ export default function Visit() {
             
             <Box className={classes.navbar}>
                 <Box component="div" className={classes.header}>
-                    <Typography variant="h4" style={{fontWeight: '900px', color: 'white'}}>Save Food</Typography>
+                    <Avatar style={{marginRight: '10px', backgroundColor:'white'}}>
+                        <FastfoodIcon style={{fill: '#002884'}}/>
+                    </Avatar>
+                    <Typography variant="h5" style={{fontWeight: '500px', color: 'white'}}>Save Food</Typography>
                 </Box>
                 <Box component='div' className={classes.navBtnContainer}>
                     <Button variant="contained" size='small' className={classes.navbtn} onClick={signUpHandler}>Sign up</Button>
@@ -332,6 +341,7 @@ export default function Visit() {
                 <Grid item md={6} sm={12} xs={12}>
                     <form onSubmit={submitHandler} autoComplete="off">
                     <div className={classes.footerBox2}>
+                        <span style={{color: 'white'}} className={classes.footer_heading}>Leave Feedback</span>
                         <TextField
                         error={validEmail}
                         label={emailLabel}
@@ -340,13 +350,14 @@ export default function Visit() {
                         value={email}
                         className={classes.textfield}
                         onChange={emailHandler}
+                        style={{height: '50px'}}
                         />
                         <TextField
                         label='Message us'
                         multiline
                         required
                         value={context}
-                        rows={5}
+                        rows={4}
                         variant='filled'
                         onChange={contexthandler}
                         className={classes.textfield && classes.textfieldmessage}
