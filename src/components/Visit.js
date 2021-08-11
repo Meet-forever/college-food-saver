@@ -18,8 +18,10 @@ const useStyle = makeStyles(theme => ({
      minHeight: '100vh'
     },
     navbar:{
-        top: '0',
         position: 'fixed',
+        top: '0',
+        left: '0',
+        right: '0',
         width: '100%',
         padding: '0 5%',
         display: 'flex',
@@ -38,7 +40,9 @@ const useStyle = makeStyles(theme => ({
         alignItems: 'center'
     },
     navbtn:{
-        margin: '2px'
+        margin: '2px',
+        padding: '2px',
+        fontSize: 'clamp(8px, 4vw, 14px)'
     },
     banner:{
         position: 'relative',
@@ -91,9 +95,6 @@ const useStyle = makeStyles(theme => ({
         justifyContent: 'flex-end',
         alignItems: 'flex-end'
     },
-    innercol:{
-        backgroundColor: 'tomato'
-    },
     box:{
         width: '100%',
         height: '300px',
@@ -109,16 +110,15 @@ const useStyle = makeStyles(theme => ({
         padding: '0 30px 0 30px'
     },
     PhotoContain:{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '90%',
-        padding: '25px',
-        overflow: 'hidden'
+       
+        maxHeight: '100%',
+        maxWidth: '100%'
     },
     footer:{
         backgroundColor: '#002884',
-        marginTop: '120px'
+        position: 'relative',
+        top: '12vh',
+        paddingBottom: '20px'
     },
     footerBox1:{
         display: 'flex',
@@ -201,16 +201,17 @@ export default function Visit() {
             
             {/* Nav Bar */}
             
+            
             <Box className={classes.navbar}>
                 <Box component="div" className={classes.header}>
-                    <Avatar style={{marginRight: '10px', backgroundColor:'white'}}>
+                    <Avatar style={{marginRight: '5px', backgroundColor:'white'}}>
                         <FastfoodIcon style={{fill: '#002884'}}/>
                     </Avatar>
-                    <Typography variant="h5" style={{fontWeight: '500px', color: 'white'}}>Save Food</Typography>
+                    <Typography variant="h5" style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)'}}>Save Food</Typography>
                 </Box>
                 <Box component='div' className={classes.navBtnContainer}>
-                    <Button variant="contained" size='small' className={classes.navbtn} onClick={signUpHandler}>Sign up</Button>
-                    <Button variant="contained" size="small" color="secondary" className={classes.navbtn} onClick={signInHandler}>Sign In</Button>
+                    <Button variant="contained"  className={classes.navbtn} onClick={signUpHandler}>Sign up</Button>
+                    <Button variant="contained"  color="secondary" className={classes.navbtn} onClick={signInHandler}>Sign In</Button>
                 </Box>
             </Box>
 
@@ -220,25 +221,25 @@ export default function Visit() {
                 <Box component="div" className={classes.overlay}></Box>
                     <Box component="div" className={classes.mainBanner}>
                         <Box component="div" className={classes.bannerContent1}>
-                                <h1>#ZEROWASTE</h1>
-                                <span style={{lineHeight: '0.9'}}>
+                                <h1 style={{fontSize: 'clamp(8px, 8vw, 32px)'}}>#ZEROWASTE</h1>
+                                <span style={{lineHeight: '0.9', fontSize: 'clamp(14px, 2vw, 18px)'}}>
                                     <span style={{fontWeight: '900'}}>Help us</span> to,<br/>
-                                    <span style={{fontSize: '72px', fontWeight:"900", lineHeight: '1'}}>SAVE</span><br/><span style={{fontSize: '72px', fontWeight:"900", lineHeight: '1'}}>  FOOD</span><br/><br/>
+                                    <span style={{fontWeight:"900", lineHeight: '1', fontSize: 'clamp(14px, 20vw, 84px)'}}>SAVE</span><br/><span style={{fontWeight:"900", lineHeight: '1', fontSize: 'clamp(14px, 20vw, 84px)'}}>  FOOD</span><br/><br/>
                                     to create<br/><br/> a <span style={{fontWeight: '900'}}>better future.</span>
                                 </span>
                                 <br/>
-                                <p >
+                                <p  style={{fontSize: 'clamp(14px, 2vw, 18px)'}}>
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
                                 </p>
                         </Box>
                         <Box component="div" className={classes.bannerContent2}>
                                 <h1 style={{color: '#3f51b5', fontWeight: '900', textAlign: 'right', lineHeight: '0.75'}}>
                                     REDUCE<br/>
-                                    <span style={{textAlign: 'left', color: 'black'}}>WASTE</span><br/><br/>
+                                    <span style={{textAlign: 'left', color: 'black', fontSize: 'clamp(8px, 8vw, 32px)'}}>WASTE</span><br/><br/>
                                     SAVE<br/>
-                                    <span style={{textAlign: 'left', color: 'black'}}>FOOD</span><br/><br/>
+                                    <span style={{textAlign: 'left', color: 'black', fontSize: 'clamp(8px, 8vw, 32px)'}}>FOOD</span><br/><br/>
                                     SHARE<br/>
-                                    <span style={{textAlign: 'left', color: 'black'}}>HAPPINESS</span>
+                                    <span style={{textAlign: 'left', color: 'black', fontSize: 'clamp(8px, 8vw, 32px)'}}>HAPPINESS</span>
                                 </h1>
                                 <IconButton aria-label="twitter picture" style={{color: 'black'}} component="span">
                                     <TwitterIcon/>
@@ -251,8 +252,7 @@ export default function Visit() {
             </Box>
 
             {/* Content and Information */}
-            <Box style={{position: 'relative', minHeight: '100vh', top: '100px'}}>
-            <Container fixed>
+            <Container fixed style={{position: 'relative', top: '12vh'}}>
                     <Grid container direction="column">
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
@@ -318,7 +318,6 @@ export default function Visit() {
                         </Grid>
                     </Grid>
             </Container>
-        </Box>
         {/* Footer Starts here */}
         <Grid container className={classes.footer}>
                 <Grid item  md={6} sm={12} xs={12}>
