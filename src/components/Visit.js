@@ -28,7 +28,7 @@ const useStyle = makeStyles(theme => ({
         height: '10vh',
         justifyContent:'space-between',
         alignItems: 'center',
-        backgroundColor: '#002884',
+        backgroundColor: 'darkblue',
         zIndex: '10'
     },
     header:{
@@ -115,7 +115,7 @@ const useStyle = makeStyles(theme => ({
         maxWidth: '100%'
     },
     footer:{
-        backgroundColor: '#002884',
+        backgroundColor: 'darkblue',
         position: 'relative',
         top: '12vh',
         paddingBottom: '20px'
@@ -196,7 +196,7 @@ export default function Visit() {
 
     return (
         <div>
-            <Box variant="div" className={classes.root}>
+            <Box component="div" className={classes.root}>
             <CssBaseline />
             
             {/* Nav Bar */}
@@ -256,38 +256,38 @@ export default function Visit() {
                     <Grid container direction="column">
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
-                                    <Box variant="div" className={classes.box}>
-                                        <Box variant="div" className={classes.boxText} >
+                                    <Box component="div" className={classes.box}>
+                                        <Box component="div" className={classes.boxText} >
                                             <h1>Who we are?</h1>
                                             <p>We are Non-profit Organization with ambition to reduce food wastage. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>
                                 <Grid item md={6} sm={12} xs={12} >
-                                    <Box variant="div" className={classes.box}>
+                                    <Box component="div" className={classes.box}>
                                         <img  alt="People Donating things" src={food} className={classes.PhotoContain}/>
                                     </Box>
                                 </Grid>
                         </Grid>
                         <Grid item container direction="row-reverse">    
                                 <Grid item md={6} sm={12} xs={12}>
-                                    <Box variant="div" className={classes.box}>
-                                        <Box variant="div" className={classes.boxText} >
+                                    <Box component="div" className={classes.box}>
+                                        <Box component="div" className={classes.boxText} >
                                             <h1>Where will your given food will go?</h1>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>
                                 <Grid item md={6} sm={12} xs={12} >
-                                    <Box variant="div" className={classes.box}>
+                                    <Box component="div" className={classes.box}>
                                         <img alt="Donation Bag" src={food2} className={classes.PhotoContain}/>
                                     </Box>
                                 </Grid>
                         </Grid>
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
-                                    <Box variant="div" className={classes.box}>
-                                        <Box variant="div" className={classes.boxText} >
+                                    <Box component="div" className={classes.box}>
+                                        <Box component="div" className={classes.boxText} >
                                             <h1>Become A Member!</h1>
                                             <div style={{display: 'flex', justifyContent: 'space-around'}}>
                                                 <p>Join now! What are you waiting for?</p>
@@ -296,22 +296,22 @@ export default function Visit() {
                                     </Box>
                                 </Grid>
                                 <Grid item md={6} sm={12} xs={12} >
-                                    <Box variant="div" className={classes.box}>
+                                    <Box component="div" className={classes.box}>
                                         <img alt="join Us" src={food3} className={classes.PhotoContain}/>
                                     </Box>
                                 </Grid>
                         </Grid>
                         <Grid item container direction="row-reverse">    
                                 <Grid item md={6} sm={12} xs={12}>
-                                    <Box variant="div" className={classes.box}>
-                                        <Box variant="div" className={classes.boxText} >
+                                    <Box component="div" className={classes.box}>
+                                        <Box component="div" className={classes.boxText} >
                                             <h1>Security</h1>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>
                                 <Grid item md={6} sm={12} xs={12} >
-                                    <Box variant="div" alt="Security" className={classes.box}>
+                                    <Box component="div" alt="Security" className={classes.box}>
                                         <img src={food4} alt="security assurance" className={classes.PhotoContain}/>  
                                     </Box>
                                 </Grid>

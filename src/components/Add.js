@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     "& > *": {
       margin: theme.spacing(1)
@@ -27,7 +27,25 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         display: "none"
-    },
+    }
+  },
+  adjust:{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+      top: '10vh',
+      height: '90vh',
+      backgroundColor: 'red'
+  },
+  contentWrapper:{
+        maxWidth: '480px',
+        border: '1px solid lightgrey',
+        borderRadius: '10px',
+        margin: '0 auto',
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'center'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -127,19 +145,18 @@ const Add = () => {
     return (
         <div>
             <NavBar />
-                <Container maxWidth="lg" >
+                <Container maxWidth="lg" style={{marginTop: '35px'}}>
+                    <Box component="div" className={classes.contentWrapper}>
                 { loading ? 
                     <Box mt={30} >
                         <h2>Adding Item....</h2> 
                         <CircularProgress />
                     </Box>
                     :
-                    <form className={classes.root} onSubmit={submitHandler} style={{ marginTop: '35px'}}>
-                        <Box p={3} style= {{ marginBottom: '30px', border: '1px dashed grey', borderRadius:'50px'  }} >
-                            <Typography variant="h4" >
-                                Add Item
+                    <form className={classes.root} onSubmit={submitHandler}>
+                            <Typography variant="h3" color="primary" style={{fontWeight: '600'}}>
+                                Add  Item
                             </Typography>
-                        </Box>
                         <div>
                             <TextField 
                                 required 
@@ -246,12 +263,12 @@ const Add = () => {
                             }
                         </div>
                         
-                        <div style = {{ marginTop: '50px'}}>
+                        <div style = {{ marginTop: '10px'}}>
                             <Button variant="contained" color="primary" type="submit">Add Item</Button>
                         </div>
                     </form>
                 }
-
+                    </Box>
                 </Container>
         </div>
     )

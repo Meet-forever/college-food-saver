@@ -28,12 +28,6 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  },
   search: {
     position: 'relative',
     borderRadius: theme.shape.borderRadius,
@@ -247,10 +241,10 @@ function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
-          <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#14b814'}}>
-            <FastfoodIcon style={{fill: '#786010'}} />
+          <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#fff'}}>
+            <FastfoodIcon style={{fill: 'darkblue'}} />
           </Avatar>
-          <Typography className={classes.title} variant="h6" noWrap >
+          <Typography style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)'}} variant="h5" noWrap >
             Save Food
           </Typography>
           <div className={classes.grow} />
