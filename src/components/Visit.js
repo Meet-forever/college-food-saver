@@ -148,7 +148,7 @@ const useStyle = makeStyles(theme => ({
         width: '60%'
     },
     textfieldmessage:{
-        width: '60%'
+        width: '60%',
         backgroundColor: 'white',
         marginBottom: '10px'
     }
