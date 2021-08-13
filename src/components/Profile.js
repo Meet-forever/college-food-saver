@@ -134,7 +134,7 @@ function Profile() {
                     label="First Name"
                     value={firstName}
                     variant="outlined"
-                    disabled
+                    readonly
                     style={{ width: '300px'}}
                   />
               </div>
@@ -144,14 +144,14 @@ function Profile() {
                     label="Last Name"
                     value={lastName}
                     variant="outlined"
-                    disabled
+                    readonly
                     style={{ width: '300px'}}
                   />
               </div>
               <div className={classes.textfields}>
                   <TextField
-                    disabled
-                    id="emailField"
+                    readonly
+                    id="outlined-disabled"
                     label="Email"
                     value={email}
                     variant="outlined"

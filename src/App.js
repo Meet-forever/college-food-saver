@@ -7,6 +7,8 @@ import List from './components/List.js'
 import Add from './components/Add.js'
 import NoPathMatch from './components/NoPathMatch'
 import Profile from './components/Profile';
+import Visit from './components/Visit'
+//import LandingPage from './components/LandingPage';
 
 
 const ProtectedRoute = (props) => {
@@ -29,6 +31,7 @@ const App = () => {
   return (
     <div className="App">
       <Switch>
+        <Route component={Visit} exact path ="/visit" />
         <LoginSignUpRollBackRoute exact path="/login" component={Login} />
         <LoginSignUpRollBackRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/home" component={Home}/>

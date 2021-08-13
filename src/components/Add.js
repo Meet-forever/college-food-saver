@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
@@ -24,7 +24,25 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         display: "none"
-    },
+    }
+  },
+  adjust:{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      position: 'relative',
+      top: '10vh',
+      height: '90vh',
+      backgroundColor: 'red'
+  },
+  contentWrapper:{
+        maxWidth: '480px',
+        border: '1px solid lightgrey',
+        borderRadius: '10px',
+        margin: '0 auto',
+        padding: '10px',
+        display: 'flex',
+        justifyContent: 'center'
   },
   cont:{
     marginTop: '30px', 
@@ -132,7 +150,9 @@ const Add = () => {
     return (
         <div>
             <NavBar />
-                <Container maxWidth="lg" className={classes.cont}>
+                <Container maxWidth="lg" style={{marginTop: '35px'}}>
+                    <Box component="div" className={classes.contentWrapper}>
+
                 { loading ? 
                     <Box mt={30} >
                         <h2>Adding Item....</h2> 
@@ -140,11 +160,10 @@ const Add = () => {
                     </Box>
                     :
                     <form className={classes.root} onSubmit={submitHandler}>
-                        <Box p={3} style={{ border: '1px solid lightgrey', borderRadius:'5px', marginBottom: '20px'  }} >
-                            <Typography variant="h4" >
-                                Add Item
+
+                            <Typography variant="h3" color="primary" style={{fontWeight: '600'}}>
+                                Add  Item
                             </Typography>
-                        </Box>
                         <div>
                             <TextField 
                                 required 
@@ -250,13 +269,13 @@ const Add = () => {
                             </div>
                             }
                         </div>
-                        
-                        <div style = {{ marginTop: '50px'}}>
-                            <Button variant="contained" color="primary" type="submit" style={{ width: 'calc(12vw + 300px)', height:'53px' }}>Add Item</Button>
+
+                        <div style = {{ marginTop: '10px'}}>
+                            <Button variant="contained" color="primary" type="submit">Add Item</Button>
                         </div>
                     </form>
                 }
-
+                    </Box>
                 </Container>
         </div>
     )

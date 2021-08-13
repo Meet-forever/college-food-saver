@@ -197,11 +197,6 @@ function Signup() {
               {loginStatus.authSuccess === "yes"  ? <CircularProgress color="secondary"/>  : "Sign Up" }
             </Button>
             <Grid container style= {{ display: 'flex',  justifyContent: 'space-between'}}>
-              <Grid item >
-                <Link href="#" variant="body2">
-                  Forgot password ?
-                </Link>
-              </Grid>
               <Grid item>
                 <span>Already have an account ? </span>
                 <Link href="/login" variant="body2">
