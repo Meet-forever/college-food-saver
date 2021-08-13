@@ -247,7 +247,6 @@ function NavBar() {
           <Typography style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)'}} variant="h5" noWrap >
             Save Food
           </Typography>
-          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Add Items" color="inherit" onClick={handleHomeClick}>
