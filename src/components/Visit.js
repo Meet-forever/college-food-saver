@@ -110,7 +110,6 @@ const useStyle = makeStyles(theme => ({
         padding: '0 30px 0 30px'
     },
     PhotoContain:{
-       
         maxHeight: '100%',
         maxWidth: '100%'
     },
@@ -125,6 +124,7 @@ const useStyle = makeStyles(theme => ({
         justifyContent: 'center',
         alignItems: 'center',
         height: '320px',
+
         color: 'white',
         padding: '10px',
         flexDirection: 'column'
@@ -148,7 +148,7 @@ const useStyle = makeStyles(theme => ({
         width: '60%'
     },
     textfieldmessage:{
-        width: '60%',
+        width: '60%'
         backgroundColor: 'white',
         marginBottom: '10px'
     }
@@ -183,6 +183,7 @@ export default function Visit() {
             setValidEmail(false);
             setEmailLabel("Email")
         }
+
         //After all processing at the end
         setemail("");
         setcontext("")
@@ -214,6 +215,7 @@ export default function Visit() {
                     <Button variant="contained"  color="secondary" className={classes.navbtn} onClick={signInHandler}>Sign In</Button>
                 </Box>
             </Box>
+
 
             {/* Main Page Banner */}
             

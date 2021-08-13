@@ -11,6 +11,8 @@ import {
 import firebase from "firebase/app"
 import TextField from '@material-ui/core/TextField';
 import dp from './assets/tomatodp.jpeg'
+import { Container } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 
 require('firebase/database');
 
@@ -68,8 +70,8 @@ function Profile() {
   
   useEffect(() => {
       firebase.database().ref('users/' + JSON.parse(localStorage.getItem("auth_id"))).once("value")
-      .then( (snapshot) => {   
-              setFirstName(snapshot.val().Firstname);
+      .then( (snapshot) => {
+              setFirstName(snapshot.child("Firstname").val());
               setLastName(snapshot.child("Lastname").val());
               setEmail(snapshot.child("Email").val());
           }).catch((error) =>{
@@ -83,8 +85,14 @@ function Profile() {
     <div>
       <CssBaseline />
       <NavBar />
+      <Container style={{ marginTop: '30px' }} >
+            <Box p={3} style= {{  border: '1px solid lightgrey', borderRadius:'5px'  }} >
+              <Typography variant="h4" >
+                  Profile
+              </Typography>
+            </Box>
+        </Container>
       <Grid container justify="center" className={classes.grid}>
-
         {/* Column 1: This will handle profile image and user name */}
         <Grid xs={12} sm={10} container item className={classes.gridChild1a}> 
           <Grid item color="primary" className={classes.gridChild2}>
@@ -105,6 +113,7 @@ function Profile() {
                     <Typography variant="h2">?</Typography>
                   </Avatar>
                 </IconButton>
+                
               </label>
             </div>
 
@@ -121,7 +130,7 @@ function Profile() {
           <Grid item className={classes.gridChild2}>
               <div className={classes.textfields}>
                 <TextField
-                    id="outlined-disabled"
+                    id="firstnameField"
                     label="First Name"
                     value={firstName}
                     variant="outlined"
@@ -131,7 +140,7 @@ function Profile() {
               </div>
               <div className={classes.textfields}>
                 <TextField
-                    id="outlined-disabled"
+                    id="lastnameField"
                     label="Last Name"
                     value={lastName}
                     variant="outlined"

@@ -8,6 +8,7 @@ import NavBar from "./Navbar";
 import { getItems } from "../Api.js";
 import LinearProgress from "@material-ui/core/LinearProgress";
 
+
 const useStyles = makeStyles((theme) => ({
   paddingForEachElement:{
     padding: '4%',
@@ -202,6 +203,7 @@ function Home() {
                 //   text: "",
                 // },
                 toolbox: {
+
                   feature: {
                     dataZoom: {
                       yAxisIndex: "none",

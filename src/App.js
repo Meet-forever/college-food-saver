@@ -10,9 +10,10 @@ import Profile from './components/Profile';
 import Visit from './components/Visit'
 //import LandingPage from './components/LandingPage';
 
+
 const ProtectedRoute = (props) => {
   return(
-        <Route path={props.path} render={data=> localStorage.getItem('auth_id') === null || localStorage.getItem('auth_id') === "NOACTIVEUSER" ? 
+        <Route path={props.path} render={data => localStorage.getItem('auth_id') === null || localStorage.getItem('auth_id') === "NOACTIVEUSER" ? 
         (<Redirect to={{pathname:'/login'}}></Redirect>):
         (<props.component {...data}></props.component>)}></Route>
     )
@@ -20,7 +21,7 @@ const ProtectedRoute = (props) => {
 
 const LoginSignUpRollBackRoute = (props) => {
   return(
-        <Route path={props.path} render={data=> localStorage.getItem('auth_id') === null || localStorage.getItem('auth_id') === "NOACTIVEUSER" ? 
+        <Route path={props.path} render={data => localStorage.getItem('auth_id') === null || localStorage.getItem('auth_id') === "NOACTIVEUSER" ? 
         (<props.component {...data}></props.component>):
         (<Redirect to={{pathname: '/home'}}></Redirect>)}></Route>
     )

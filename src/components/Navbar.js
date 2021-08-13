@@ -19,6 +19,7 @@ import { deepOrange } from '@material-ui/core/colors';
 import { getItems } from "../Api.js"
 import firebase from "firebase/app"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -78,7 +79,6 @@ const useStyles = makeStyles((theme) => ({
     },
     square: {
     color: theme.palette.getContrastText(deepOrange[500]),
-    backgroundColor: deepOrange[500],
     padding: 20
   },
   },
@@ -247,6 +247,7 @@ function NavBar() {
           <Typography style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)'}} variant="h5" noWrap >
             Save Food
           </Typography>
+          </Link>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="Add Items" color="inherit" onClick={handleHomeClick}>

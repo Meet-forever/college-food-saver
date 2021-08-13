@@ -18,12 +18,9 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    "& > *": {
-      margin: theme.spacing(1)
-    },
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '250px',
     },
     input: {
         display: "none"
@@ -47,6 +44,10 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         justifyContent: 'center'
   },
+  cont:{
+    marginTop: '30px', 
+    marginBottom: '20px'
+  },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -55,6 +56,10 @@ const useStyles = makeStyles(theme => ({
   input: {
         display: 'none',
   },
+  uploadBtn: {
+    width: '250px', 
+    height:'47px'
+  }
 }));
 
 const db = app.firestore()
@@ -147,6 +152,7 @@ const Add = () => {
             <NavBar />
                 <Container maxWidth="lg" style={{marginTop: '35px'}}>
                     <Box component="div" className={classes.contentWrapper}>
+
                 { loading ? 
                     <Box mt={30} >
                         <h2>Adding Item....</h2> 
@@ -154,6 +160,7 @@ const Add = () => {
                     </Box>
                     :
                     <form className={classes.root} onSubmit={submitHandler}>
+
                             <Typography variant="h3" color="primary" style={{fontWeight: '600'}}>
                                 Add  Item
                             </Typography>
@@ -243,7 +250,7 @@ const Add = () => {
                                         variant="contained"
                                         color="secondary"
                                         aria-label="upload picture" component="span"
-                                        className={classes.button}
+                                        className={classes.uploadBtn}
                                         startIcon={<ImageIcon />}
                                         required
                                     >
@@ -262,7 +269,7 @@ const Add = () => {
                             </div>
                             }
                         </div>
-                        
+
                         <div style = {{ marginTop: '10px'}}>
                             <Button variant="contained" color="primary" type="submit">Add Item</Button>
                         </div>
