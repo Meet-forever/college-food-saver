@@ -8,6 +8,8 @@ import Add from './components/Add.js'
 import NoPathMatch from './components/NoPathMatch'
 import Profile from './components/Profile';
 import Visit from './components/Visit'
+import FAQ from './components/FAQ'
+
 //import LandingPage from './components/LandingPage';
 
 
@@ -32,6 +34,7 @@ const App = () => {
     <div className="App">
       <Switch>
         <Route component={Visit} exact path ="/visit" />
+        <Route component={FAQ} exact path ="/faq" />
         <LoginSignUpRollBackRoute exact path="/login" component={Login} />
         <LoginSignUpRollBackRoute exact path="/signup" component={Signup} />
         <ProtectedRoute exact path="/home" component={Home}/>
