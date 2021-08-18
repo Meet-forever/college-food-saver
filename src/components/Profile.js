@@ -4,45 +4,29 @@ import {
   CssBaseline,
   Typography,
   Avatar,
-  Grid,
   makeStyles,
   IconButton,
 } from "@material-ui/core";
 import firebase from "firebase/app"
 import TextField from '@material-ui/core/TextField';
-import dp from './assets/tomatodp.jpeg'
-import { Container } from '@material-ui/core';
+import dp from './assets/tomatodp.jpeg';
 import Box from '@material-ui/core/Box';
 
 require('firebase/database');
 
 
 const useStyle = makeStyles((theme) => ({
-  grid: {
-    width: "100%",
-    margin: 0,
-    alignItems: "center",
-    height: "90vh",
-  },
-  gridChild1a: {
-    height: "40%",
-    width: "100%",
-    justifyContent: "center",
-    paddingTop: "20px",
-  },
-  gridChild1b: {
-    height: "60%",
-    width: "100%",
-    justifyContent: "center",
-  },
-  gridChild2: {
-    width: "100%",
-    justifyContent: "center",
-    alignContent: "center",
+  contentWrapper:{
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxWidth: '480px',
+    border: '1px solid lightgrey',
+    padding: '10px',
+    borderRadius: '3%'
   },
   avatar: {
-    position: "abolute",
-    margin: "0px auto 0px auto",
     width: "150px",
     height: "150px",
   },
@@ -54,7 +38,7 @@ const useStyle = makeStyles((theme) => ({
     marginBottom: "30px",
   },
   formcontrol: {
-    width: "300px",
+    maxwidth: "300px",
   },
   input: {
     display: "none",
@@ -84,18 +68,15 @@ function Profile() {
   return (
     <div>
       <CssBaseline />
+      <Box component="div" style={{position: 'absolute', left: 0, right: 0, top: 0}}>
       <NavBar />
-      <Container style={{ marginTop: '30px' }} >
-            <Box p={3} style= {{  border: '1px solid lightgrey', borderRadius:'5px'  }} >
-              <Typography variant="h4" >
-                  Profile
-              </Typography>
-            </Box>
-        </Container>
-      <Grid container justify="center" className={classes.grid}>
-        {/* Column 1: This will handle profile image and user name */}
-        <Grid xs={12} sm={10} container item className={classes.gridChild1a}> 
-          <Grid item color="primary" className={classes.gridChild2}>
+      </Box>
+      <Box component="div" style={{display: 'flex', justifyContent: 'center', flexDirection: 'column',alignItems: 'center', height: '100vh'}}>
+            <Typography variant="h4" color="primary" style={{marginTop: '40px', fontWeight: '700', marginBottom: '10px'}}>
+              Profile
+            </Typography>
+        <Box component="div" className={classes.contentWrapper}>
+            <Box component="div">
             <div className={classes.userProfileEdit}>
               <input
                 accept="image/*"
@@ -109,33 +90,27 @@ function Profile() {
                   aria-label="upload picture"
                   component="span"
                 >
-                  <Avatar src={dp} className={classes.avatar}>
+                  <Avatar src={dp} alt="your profile"  className={classes.avatar}>
                     <Typography variant="h2">?</Typography>
                   </Avatar>
                 </IconButton>
                 
               </label>
             </div>
-
-            <Grid item>
-              <Typography variant="h5" className={classes.userName}>
+            <Typography variant="h5" className={classes.userName}>
               Welcome, { firstName }!  
               </Typography>
-            </Grid>
-          </Grid>
-        </Grid>
+            </Box>
 
-        {/* Column 2: This will handle all the editable features */}
-        <Grid xs={12} sm={10} container item className={classes.gridChild1b}>
-          <Grid item className={classes.gridChild2}>
+            <Box component="div">
               <div className={classes.textfields}>
                 <TextField
                     id="firstnameField"
                     label="First Name"
                     value={firstName}
                     variant="outlined"
-                    readonly
-                    style={{ width: '300px'}}
+                    readOnly
+                    style={{ width: 'clamp(250px, 30vw, 380px)', height: 'clamp(20px, 10vh ,40px)'}}
                   />
               </div>
               <div className={classes.textfields}>
@@ -144,24 +119,23 @@ function Profile() {
                     label="Last Name"
                     value={lastName}
                     variant="outlined"
-                    readonly
-                    style={{ width: '300px'}}
+                    readOnly
+                    style={{ width: 'clamp(250px, 30vw, 380px)', height: 'clamp(20px, 10vh ,40px)'}}
                   />
               </div>
               <div className={classes.textfields}>
                   <TextField
-                    readonly
+                    readOnly
                     id="outlined-disabled"
                     label="Email"
                     value={email}
                     variant="outlined"
-                    style={{ width: '300px'}}
+                    style={{ width: 'clamp(250px, 30vw, 380px)', height: 'clamp(20px, 10vh ,40px)'}}
                   />
               </div>
-          </Grid>
-        </Grid>
-      </Grid>
-      
+              </Box>
+        </Box>
+        </Box>
     </div>
   );
 }
