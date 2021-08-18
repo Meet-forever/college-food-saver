@@ -32,14 +32,15 @@ const useStyles = makeStyles(theme => ({
       alignItems: 'center',
       position: 'relative',
       top: '10vh',
-      height: '90vh'
+      height: '90vh',
+      backgroundColor: 'red'
   },
   contentWrapper:{
-        maxWidth: '550px',
+        maxWidth: '480px',
         border: '1px solid lightgrey',
         borderRadius: '10px',
-        padding: '20px',
         margin: '0 auto',
+        padding: '10px',
         display: 'flex',
         justifyContent: 'center'
   },
