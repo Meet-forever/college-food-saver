@@ -10,6 +10,7 @@ import {
  
 } from "@material-ui/core";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
+import { DetailsSharp } from "@material-ui/icons";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,70 +70,60 @@ const Faq = () => {
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question2? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question3? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question4? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question5? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question6? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question7? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question8? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question9? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
     {
       question: "You have Question10? We have answer!",
       subHeading: "Sub Heading",
       answer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
       key: Math.random()*100,
-      expand: false
     },
   ]);
   //const [open, setOpen] = React.useState(false);
@@ -145,25 +136,18 @@ const Faq = () => {
     history.push("./signup");
   };
   const expandAllHandler = () =>{
-      setFaqList(faqList.map(event => {
-        if(event.expand === true) return event;
-        return{
-          ...event,
-          expand: true
-        }
-      })) 
-  }
+      let details = document.getElementsByTagName('details')
+      for(let i = 0 ; i < 10 ; i++){
+        details[i].setAttribute('open', true)
+      }    
+    }
   const collapseAllHandler = () =>{
-    setFaqList(faqList.map(event => {
-      if(event.expand == false){
-        return event
-      }
-      return{
-        ...event,
-        expand: false
-      }
-    })) 
+    let details = document.getElementsByTagName('details')
+    for(let i = 0 ; i < 10 ; i++){
+      details[i].removeAttribute('open')
+    }    
   }
+
   return (
     <div>
       <CssBaseline />
@@ -199,7 +183,7 @@ const Faq = () => {
           </Button>
         </Box>
       </Box>
-      {/* "Fake area consumer", which will hide behind the nav bar. This is used in order to indent the container */}
+      {/* "Fake area", which will hide behind the nav bar. This is used to indent the container */}
       <div style={{height: '14vh'}}></div>
       {/* Main Content Page */}
       <Box component="div" className={classes.contentContainer}>
@@ -208,7 +192,7 @@ const Faq = () => {
           variant="h4">
           FAQ's to make life just simpler
         </Typography>
-        <div>
+        <div style={{margin: '10px 0'}}>
           <span>
             <Button onClick={expandAllHandler}>Expand All</Button>
             <Button onClick={collapseAllHandler}>Collapse All</Button> 
@@ -217,7 +201,7 @@ const Faq = () => {
           {/* FAQ list starts */}
           {faqList.map(i => {
               return(
-                <details open={i.expand} key={i.key}>
+                <details key={i.key}>
                 <summary className={classes.summaryBox}>{i.question}</summary>
                 <div style={{textAlign: 'left', padding: '5px 10px'}}>
                   <h2>{i.subHeading}</h2>
@@ -226,6 +210,7 @@ const Faq = () => {
               </details>
           )
           })}
+          
       </Box>
     </div>
   );
