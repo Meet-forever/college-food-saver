@@ -7,6 +7,10 @@ import NavBar from './Navbar'
 import { getItems } from "../Api.js"
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
+import Snackbar from '@material-ui/core/Snackbar';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -86,6 +90,7 @@ const [ totalOrders, setTotalOrders ] = useState(100)
 const [ loading, setLoading ] = useState(false);
 const classes = useStyles()
 
+
 // Dummy Data
 
 var date = [];
@@ -106,12 +111,14 @@ useEffect(() => {
     setLoading(true)
     const fetchItems = async () => {
     const newItems = await getItems()
-    setTotalOrders(newItems.length)
+    setTotalOrders(newItems.filter(item => item.requested === true).length)
     setLoading(false)
     }
     fetchItems()
     
 }, [])
+
+
 
   
   return (
@@ -129,29 +136,29 @@ useEffect(() => {
           <ReactEcharts
              
              option = {{              
-                        tooltip: {
-                            trigger: 'item'
-                        },
-                        series: [
-                            {
-                                name: 'Insights',
-                                type: 'pie',
-                                radius: '85%',
-                                data: [
-                                    {value: 1048, name: 'Food \n Saved'},
-                                    {value: 735, name: 'This week count'},
-                                    {value: 484, name: 'New \n Items'},
-                                    {value: 580, name: 'Environmental \n Impact'},
-                                ],
-                                emphasis: {
-                                    itemStyle: {
-                                        shadowBlur: 10,
-                                        shadowOffsetX: 0,
-                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                    }
-                                }
-                            }
-                        ]
+              tooltip: {
+                  trigger: 'item'
+              },
+              series: [
+                  {
+                      name: 'Insights',
+                      type: 'pie',
+                      radius: '85%',
+                      data: [
+                          {value: 1048, name: 'Food \n Saved'},
+                          {value: 735, name: 'This week count'},
+                          {value: 484, name: 'New \n Items'},
+                          {value: 580, name: 'Environmental \n Impact'},
+                      ],
+                      emphasis: {
+                          itemStyle: {
+                              shadowBlur: 10,
+                              shadowOffsetX: 0,
+                              shadowColor: 'rgba(0, 0, 0, 0.5)'
+                          }
+                      }
+                  }
+              ]
           }} 
           
           />
@@ -159,7 +166,7 @@ useEffect(() => {
         </Grid>
         <Grid item xs={7} sm={6} md={3} style={{ marginTop: '42px'}}>
           <Typography variant="h4">
-              Total Orders
+              Orders
           </Typography>
           <Box  border={1} borderRadius={5} p={10} mt={2}>
             <h1>{ loading ? <LinearProgress /> :totalOrders}</h1>
@@ -209,17 +216,17 @@ useEffect(() => {
               }],
               series: [
                   {
-                      name: 'Total Food Save Over An Year',
-                      type: 'line',
-                      symbol: 'none',
-                      sampling: 'lttb',
-                      itemStyle: {
-                          color: 'rgb(255, 70, 131)'
-                      },
-                      areaStyle: {
-                          color: 'blue'
-                      },
-                      data: data
+                    name: 'Total Food Save Over An Year',
+                    type: 'line',
+                    symbol: 'none',
+                    sampling: 'lttb',
+                    itemStyle: {
+                        color: 'rgb(255, 70, 131)'
+                    },
+                    areaStyle: {
+                        color: 'blue'
+                    },
+                    data: data
                   }
               ]
           }}

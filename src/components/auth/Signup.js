@@ -30,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     backgroundImage: `url(${coverImg})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: '1000px 780px',
+    theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: '102vw 103vh',
     backgroundPosition: 'center',
   },
   paper: {
@@ -64,6 +64,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  spaceBetween: {
+    display: 'flex',  
+    justifyContent: 'space-between'
+  }
 }));
 
 
@@ -126,7 +130,7 @@ function Signup() {
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
       
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className ={classes.avatar}>
             <LockOutlinedIcon />
@@ -143,7 +147,6 @@ function Signup() {
               margin="normal"
               required
               fullWidth
-              name="text"
               id="firstname"
               label="First Name"
               name="firstname"
@@ -196,7 +199,7 @@ function Signup() {
             >
               {loginStatus.authSuccess === "yes"  ? <CircularProgress color="secondary"/>  : "Sign Up" }
             </Button>
-            <Grid container style= {{ display: 'flex',  justifyContent: 'space-between'}}>
+            <Grid container className={classes.spaceBetween}>
               <Grid item >
                 <Link href="#" variant="body2">
                   Forgot password ?
@@ -239,7 +242,7 @@ function Signup() {
       </Modal>
         </div>
       </Grid>
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
+      <Grid item xs={false} sm={false} md={7} className={classes.image} />
       
     </Grid>    
   );

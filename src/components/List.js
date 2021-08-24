@@ -12,11 +12,9 @@ import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
-import AddBoxIcon from '@material-ui/icons/AddBox';
 import Box from '@material-ui/core/Box';
 import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import { useHistory } from "react-router-dom";
 import NavBar from './Navbar'
 import Signup from './assets/signup.jpg'
 import { getItems } from "../Api.js"
@@ -38,8 +36,7 @@ import Fade from '@material-ui/core/Fade';
 import Modal from '@material-ui/core/Modal';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { deleteItem } from '../Api'
-import { spacing } from '@material-ui/system';
-
+import io from 'socket.io-client'
 
 const columns = [
   { id: 'name', label: 'Name', minWidth: 170, align: 'center'  },
@@ -82,6 +79,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const socket = io('http://localhost:4000')
+
 function List() {
   const classes = useStyles();
   const [ loading, setLoading ] = useState(false);
@@ -94,8 +93,6 @@ function List() {
   const [open, setOpen] = useState(false);
   const [ itemModalId, setItemModalId] = useState(0)
   const [ onItemUpdate, setOnItemUpdate ] = useState(false)
-
-
 
   const handleChange = (event, nextView) => {
     setView(nextView);
@@ -136,27 +133,26 @@ function List() {
   }
 
   useEffect(() => {
-
     const fetchItems = async () => {
       setLoading(true)
       const newItems = await getItems()
       setItems(newItems)
       setLoading(false)
-
     }
+    socket.on('insert', () => {
+      fetchItems()
+    })
+    socket.on('update', () => {
+      fetchItems()
+    })
     fetchItems()
   }, [onItemUpdate])
 
   const rows = [];
 
-  items.filter(filteredItems => filteredItems.r_accepted === false ).map(item => ( 
+  items.filter(filteredItems => filteredItems.requested === false ).map(item => ( 
     rows.push(createData(item.title , item.description, item.calories, item.fats, item.carbs, item.protiens, new Date(item.date).toString()))
   ))    
-
-  const history = useHistory()
-  const handleAddClick = () =>{
-    history.push('/add')
-  }
 
   return (
     <div>
@@ -184,10 +180,13 @@ function List() {
       // module view
       <Container maxWidth="lg" >
       {loading ? <CircularProgress /> : 
-        <Grid container spacing={2}>
-          {
-                items.filter(filteredItems => filteredItems.r_accepted === false ).map(item => (
-                <Grid item xs={12} md={4} sm={6} key={item._id}>
+        <Grid container spacing={2} >
+          {items.filter(filteredItems => filteredItems.requested === false ).length === 0 ? 
+          <Typography>No items listed!</Typography>:
+          
+                items.filter(filteredItems => filteredItems.requested === false ).map(item => (
+                  item !== null ?   
+                  <Grid item xs={12} md={4} sm={6} key={item._id}>
                   <Card className={classes.root} >
                     <CardActionArea>
                         <CardMedia
@@ -227,7 +226,7 @@ function List() {
                       </CardActions>
                     </CardActionArea>
                   </Card>
-                </Grid>
+                </Grid> : <p> No items found !</p> 
                 ))
           }
           </Grid>
@@ -303,12 +302,9 @@ function List() {
           <h2 id="transition-modal-title">Deleting Item....</h2>
             <div>
               <CircularProgress style= {{ marginLeft: '90px'}} /> 
-
             </div>         
         </div>
-        
         : 
-
           <div className={classes.paper}>
             <h2 id="transition-modal-title">Delete Item ?</h2>
             <div>
@@ -329,6 +325,5 @@ function List() {
 
   );
 }
-
 
 export default List

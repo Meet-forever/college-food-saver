@@ -10,7 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom"
 import Link from '@material-ui/core/Link';
 import Alert from '@material-ui/lab/Alert';
-import logo from '../assets/logincover.png'
+import coverImg from '../assets/logincover.png'
 import Modal from '@material-ui/core/Modal';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Fade from '@material-ui/core/Fade';
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: `url(${logo})`,
+    backgroundImage: `url(${coverImg})`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: '850px 790px',
+    theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+    backgroundSize: '58vw 103vh',
     backgroundPosition: 'center',
   },
   paper: {
@@ -59,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  spaceBetween: {
+    display: 'flex',  
+    justifyContent: 'space-between'
+  }
 }));
 
 function Login() {
@@ -100,8 +104,8 @@ function Login() {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item xs={false} sm={false} md={7} className={classes.image} />
+      <Grid item xs={12} sm={12} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Avatar className={classes.avatar}>
             <DoubleArrowIcon />
@@ -146,16 +150,16 @@ function Login() {
             >
               {loginStatus.authSuccess === "yes" ? <CircularProgress color="secondary"/>  : "Sign In" }
             </Button>
-            <Grid container style= {{ display: 'flex',  justifyContent: 'space-between'}}>
-              <Grid item >
-                <Link href="#" variant="body2">
-                  Forgot password ?
-                </Link>
-              </Grid>
-              <Grid item>
+            <Grid container className={classes.spaceBetween}>
+            <Grid item>
                 <span>Don't have an account ? </span>
                 <Link href="/signup" variant="body2">
                   {"SignUp"}
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2">
+                  Forgot password ?
                 </Link>
               </Grid>
             </Grid>

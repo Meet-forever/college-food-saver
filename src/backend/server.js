@@ -10,21 +10,53 @@ require('dotenv').config()
 const Item = require("./models/Item");
 const User = require("./models/User");
 const {CloudTasksClient} = require('@google-cloud/tasks');
+const { LiveTvRounded } = require("@material-ui/icons");
 const client = new CloudTasksClient();
+
+// serve on port 4000
+const PORT = 4000;
+const app = express();
+
+// socket.io
+const server = require('http').createServer(app)
+const io = require('socket.io')(server,{
+    cors:{
+        origin:'*',
+    }
+})
 
 try {
   // connect db 
 mongoose.connect(process.env.DB_CONNECTION_STRING);
 mongoose.connection.once("open", () => {
   console.log("Mongodb connection established successfully");
+  const db = mongoose.connection;
+  const taskCollection = db.collection('items');
+  const changeStream = taskCollection.watch();
+
+io.on('connection', socket =>{
+  console.log('connection made successfully')
+})
+    changeStream.on('change', (change) => {
+        let itemLen = 0;
+
+      if(change.operationType === 'update') {
+        const task = change.fullDocument; 
+        let doc;
+        Item.find({requested: true}, (err, item) => {
+          itemLen = item.length
+        });
+        Item.findById(change.documentKey._id, (err, item) => {
+          io.emit('update', { item, itemLen})
+        });
+      } else if(change.operationType === 'insert') {
+          io.emit('insert')
+      }
+    });
 });
 }catch(err){
   console.log(err)
 }
-
-// serve on port 4000
-const PORT = 4000;
-const app = express();
 
 // cors helps to break webbrowser rule of connecting with an external api because of which node.js can connect to the browser
 app.use(cors());
@@ -93,6 +125,7 @@ async function createTask(id){
     console.log(`Created task ${name}`);
 }
 
+
 // to create a new user
 app.post("/signup", (req, res) => {
   const user = new User(req.body);
@@ -113,6 +146,21 @@ app.get("/login/:email", (req, res) => {
     res.json(user);
   });  
 });
+
+app.get('/notificationscount', (req, res) => {
+  Item.find({requested: true}, (err, item) => {
+    res.json(item)
+  })
+})
+
+app.get('/newordernotifications', (req, res) => {
+  Item.find({requested: true}) 
+  .limit(3)
+  .sort({_id:-1})
+  .exec(function(err, item) {
+    res.json(item)
+  })
+})
 
 // to verify a single user credentials for login
 app.get("/verify/:email", (req, res) => {
@@ -145,7 +193,7 @@ app.post("/:id", (req, res) => {
         })
         .catch((err) => res.status(500).send(err.message));
     }
-  });
+  }); 
 });
 
 app.delete("/item/:id", (req, res) => {
@@ -170,6 +218,6 @@ app.get("/item/:id", (req, res) => {
 });
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log("Server is running on port " + PORT);
 });

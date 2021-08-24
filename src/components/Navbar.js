@@ -20,6 +20,17 @@ import { getItems } from "../Api.js"
 import firebase from "firebase/app"
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import { Link } from "react-router-dom";
+import MuiAlert from '@material-ui/lab/Alert';
+import { getNotificationCount, getNewOrderNotifications } from "../Api.js"
+import Notifications from "react-notifications-menu";
+import io from 'socket.io-client'
+import Snackbar from '@material-ui/core/Snackbar';
+import viewmore from './assets/viewmore.png'
+
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -89,28 +100,59 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const socket = io('http://localhost:4000')
 
 function NavBar() {
+
+  const [open, setOpen] = React.useState(false);
+  const [messageInfo, setMessageInfo] = React.useState("");
+  
+  const [ isOrderNotificationOpen, setIsOrderNotificationOpen ] = useState(false)
+  const [ newOrderNotifications, setNewOrderNotifications ] = useState([{}]);
+
+  const handleClose = (event, reason) => {
+    setOpen(false);
+  };
+
+  const handleOrderNotificationClose = () => {
+    setIsOrderNotificationOpen(false);
+  }
+  
+  const handleExited = () => {
+    setMessageInfo("");
+  };
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  
   const history = useHistory()
-
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
   const [error, setError] = useState("")
-  
   const [ itemsNotificationCount, setItemsNotificationCount ] = useState(0)
+  const [ currentNotificationsCount, setCurrentNotificationsCount ] = useState(0)
 
   useEffect(() => {
     const fetchItems = async () => {
       const newItems = await getItems()
-      setItemsNotificationCount(newItems.length)
+      setItemsNotificationCount(newItems.filter( newItem => newItem.requested === false).length)
+      const notification = await getNotificationCount()
+      const newOrderNotifications = await getNewOrderNotifications()
+      setNewOrderNotifications(newOrderNotifications)
+      setCurrentNotificationsCount(notification.length)
     }
     fetchItems()
-  }, [])
+    socket.on('update', document => {
+        // Set a new snack when we don't have an active one
+        setMessageInfo(document.item.title);
+        setCurrentNotificationsCount(document.itemLen)
+        setOpen(true);
+
+    })
+    setOpen(false);
+
+  }, [currentNotificationsCount])
 
   function handleLogout() {
 
@@ -135,6 +177,10 @@ function NavBar() {
     setAnchorEl(event.currentTarget);
   };
 
+  const handleNotificationMouseEnter = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
+
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -144,6 +190,10 @@ function NavBar() {
     handleMobileMenuClose();
   };
 
+  const handleNotificationMenuClose = () => {
+    setAnchorEl2(null);
+  }
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
@@ -151,6 +201,10 @@ function NavBar() {
   const handleHomeClick =  () => {
      history.push('/home');
   };
+
+  const handleNotificationClick = () => {
+    history.push('/orders');
+  }
 
   const handleAddClick = () => {
       history.push('/add');
@@ -181,7 +235,45 @@ function NavBar() {
       <MenuItem onClick={handleLogout}>Log out</MenuItem>
 
     </Menu>
+    
   );
+
+  const renderOrderNotificationsMenu = (
+    <Menu
+    id="simple-menu"
+    anchorEl={anchorEl2}
+    keepMounted
+    open={Boolean(anchorEl2)}
+    onClose={handleNotificationMenuClose}
+  >
+    <h2 style={{ textDecoration: "underline", margin: "10px 40px" }}>
+      Orders
+    </h2>
+    {
+    newOrderNotifications.map(orders => 
+      <MenuItem onClick={handleNotificationClick} key={orders._id}>
+      <img
+        src={orders.itemImageURL}
+        width={"25px"}
+        height={"25px"}
+        style={{ borderRadius: "50%" }}
+      />
+      &nbsp; { orders.title } 
+    </MenuItem>
+    )
+    }
+
+        <MenuItem onClick={handleNotificationClick}>
+          <img
+            src={viewmore}
+            width={"30px"}
+            height={"30px"}
+          />{" "}
+          &nbsp;View More
+        </MenuItem>
+  </Menu>
+    
+  )
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
   const renderMobileMenu = (
@@ -204,7 +296,7 @@ function NavBar() {
       </MenuItem>
       <MenuItem>
         <IconButton aria-label="show 0 new notifications" color="inherit">
-          <Badge badgeContent={0} color="secondary">
+          <Badge badgeContent={currentNotificationsCount} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -243,7 +335,24 @@ function NavBar() {
   );
 
   return (
+   
     <div className={classes.grow}>
+    <Snackbar
+      key={1}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      open={open}
+      autoHideDuration={6000}
+      onClose={handleClose}
+      onExited={handleExited}
+      message={messageInfo}
+    >
+      <Alert severity="info">
+            {messageInfo} order placed
+      </Alert>
+    </Snackbar>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
           <Link style={{ display: 'flex', alignItems: 'center', textDecoration: "none", color: 'white'}} to={'/login'}>
@@ -261,8 +370,9 @@ function NavBar() {
                 <HomeIcon />
               </Badge>
             </IconButton>
-            <IconButton aria-label="show 0 new notifications" color="inherit">
-              <Badge badgeContent={0} color="secondary">
+            <IconButton aria-label="show 0 new notifications" color="inherit" 
+             onMouseEnter={handleNotificationMouseEnter}                       >
+              <Badge badgeContent={currentNotificationsCount} color="secondary">
                 <NotificationsIcon />
               </Badge>
             </IconButton>
@@ -287,7 +397,7 @@ function NavBar() {
               aria-label="account of current user"
               aria-controls={menuId}
               aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
+              onMouseEnter={handleProfileMenuOpen}
               color="inherit"
             >
               <AccountCircle />
@@ -307,7 +417,9 @@ function NavBar() {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
+      {renderOrderNotificationsMenu}
       {renderMenu}
+      
     </div>
   );
 }

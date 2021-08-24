@@ -49,3 +49,7 @@ export const deleteItem = (id) => fetch(`https://college-food-saver-app.ue.r.app
 })
 // get a single item by providing a id 
 export const getItem = (id) => fetch(`https://college-food-saver-app.ue.r.appspot.com/${id}`).then(res => res.json())
+
+export const getNotificationCount = () => fetch('http://localhost:4000/notificationscount').then(res => res.json())
+
+export const getNewOrderNotifications = () => fetch('http://localhost:4000/newordernotifications').then(res => res.json())
