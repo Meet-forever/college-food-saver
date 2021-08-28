@@ -6,12 +6,12 @@ import {
   Box,
   Typography,
   Button,
-  Avatar
+  Avatar,
+  MenuItem,
+  Menu
  
 } from "@material-ui/core";
 import FastfoodIcon from "@material-ui/icons/Fastfood";
-import { DetailsSharp } from "@material-ui/icons";
-
 
 const useStyles = makeStyles(theme => ({
   navbar: {
@@ -62,9 +62,16 @@ const useStyles = makeStyles(theme => ({
 
 const Faq = () => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const handleMenuOpen = e => {
+    setAnchorEl(e.currentTarget);
+  }
+  const handleMenuClose = () =>{
+    setAnchorEl(null);
+  }
   // This will store array of objects to create list and it's key-values
   // In future if we want to add some search bar we can use below object as a json file to search data
-  const [faqList, setFaqList] = React.useState([
+  const faqList = React.useRef([
     {
       question: "You have Question1? We have answer!",
       subHeading: "Sub Heading",
@@ -126,12 +133,7 @@ const Faq = () => {
       key: Math.random()*100,
     },
   ]);
-  //const [open, setOpen] = React.useState(false);
   const history = useHistory();
-  // Handle sign in and out links
-  const signInHandler = () => {
-    history.push("./login");
-  };
   const signUpHandler = () => {
     history.push("./signup");
   };
@@ -147,6 +149,9 @@ const Faq = () => {
       details[i].removeAttribute('open')
     }    
   }
+  const homeHandler = () => {
+    history.push('./home');
+}
 
   return (
     <div>
@@ -159,29 +164,38 @@ const Faq = () => {
           </Avatar>
           <Typography
             variant="h5"
+            onClick={homeHandler}
             style={{
               fontWeight: "500px",
               color: "white",
               fontSize: "clamp(20px, 5vw, 32px)",
+              cursor: 'pointer'
             }}>
             Save Food
           </Typography>
         </Box>
-        <Box component="div" className={classes.navBtnContainer}>
-          <Button
-            variant="contained"
-            className={classes.navbtn}
-            onClick={signUpHandler}>
-            Sign up
-          </Button>
-          <Button
-            variant="contained"
-            color="secondary"
-            className={classes.navbtn}
-            onClick={signInHandler}>
-            Sign In
-          </Button>
-        </Box>
+        <Button
+          aria-controls="join-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color="primary"
+          onClick = {handleMenuOpen}
+          style={{backgroundColor: '#f50057', fontWeight: '400'}}
+        >
+        Join Us
+      </Button>
+      <Menu 
+        id='join-menu'
+        anchorEl={anchorEl}
+        open ={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        keepMounted
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <MenuItem onClick={signUpHandler}>As a Client</MenuItem>
+        <MenuItem onClick={signUpHandler}>As a Student</MenuItem>
+      </Menu>
       </Box>
       {/* "Fake area", which will hide behind the nav bar. This is used to indent the container */}
       <div style={{height: '14vh'}}></div>
@@ -199,7 +213,7 @@ const Faq = () => {
           </span>
         </div>
           {/* FAQ list starts */}
-          {faqList.map(i => {
+          {faqList.current.map(i => {
               return(
                 <details key={i.key}>
                 <summary className={classes.summaryBox}>{i.question}</summary>

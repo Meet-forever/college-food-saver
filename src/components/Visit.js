@@ -1,5 +1,5 @@
 import React from 'react'
-import { CssBaseline, Grid, makeStyles, Box, Container, Button, TextField, Typography, IconButton, Paper, Avatar} from '@material-ui/core'
+import { CssBaseline, Grid, makeStyles, Box, Container, Button, TextField, Typography, IconButton, Paper, Avatar, Menu, MenuItem} from '@material-ui/core'
 import food from './assets/food.png';
 import food2 from './assets/food2.png';
 import food3 from './assets/food3.png';
@@ -109,6 +109,9 @@ const useStyle = makeStyles(theme => ({
         flexDirection: 'column',
         padding: '0 30px 0 30px'
     },
+    pStyle:{
+        fontSize: 'clamp(12px, 2vw, 1.2rem)',
+    },
     PhotoContain:{
         maxHeight: '100%',
         maxWidth: '100%'
@@ -164,8 +167,14 @@ export default function Visit() {
     const [validEmail, setValidEmail] = React.useState(false)
     const emailcheck = /^[a-z0-9._\-+]+@[a-z]+\.([a-z]{2}\.)?[a-z]{2,3}$/;
     const history = useHistory();
-
-
+    const [anchorEl, setAnchorEl] = React.useState(null);
+  
+    const handleMenuOpen = e => {
+    setAnchorEl(e.currentTarget);
+    };
+    const handleMenuClose = () =>{
+    setAnchorEl(null);
+    };
     const emailHandler = (e) =>{
         setemail(e.target.value);
     };
@@ -188,11 +197,11 @@ export default function Visit() {
         setemail("");
         setcontext("")
     }
-    const signInHandler = () =>{
-        history.push('./login');
-    }
     const signUpHandler = () =>{
         history.push('./signup');
+    }
+    const homeHandler = () => {
+        history.push('./home');
     }
 
     return (
@@ -208,11 +217,31 @@ export default function Visit() {
                     <Avatar style={{marginRight: '5px', backgroundColor:'white'}}>
                         <FastfoodIcon style={{fill: '#002884'}}/>
                     </Avatar>
-                    <Typography variant="h5" style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)'}}>Save Food</Typography>
+                    <Typography onClick={homeHandler} variant="h5" style={{fontWeight: '500px', color: 'white', fontSize: 'clamp(20px, 5vw, 32px)', cursor: 'pointer'}}>Save Food</Typography>
                 </Box>
                 <Box component='div' className={classes.navBtnContainer}>
-                    <Button variant="contained"  className={classes.navbtn} onClick={signUpHandler}>Sign up</Button>
-                    <Button variant="contained"  color="secondary" className={classes.navbtn} onClick={signInHandler}>Sign In</Button>
+                <Button
+          aria-controls="join-menu"
+          aria-haspopup="true"
+          variant="contained"
+          color="primary"
+          onClick = {handleMenuOpen}
+          style={{backgroundColor: '#f50057', fontWeight: '400'}}
+        >
+        Join Us
+      </Button>
+      <Menu 
+        id='join-menu'
+        anchorEl={anchorEl}
+        open ={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        keepMounted
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+      >
+        <MenuItem onClick={signUpHandler}>As a Client</MenuItem>
+        <MenuItem onClick={signUpHandler}>As a Student</MenuItem>
+      </Menu>
                 </Box>
             </Box>
 
@@ -254,14 +283,14 @@ export default function Visit() {
             </Box>
 
             {/* Content and Information */}
-            <Container fixed style={{position: 'relative', top: '12vh'}}>
+            <Container fixed style={{position: 'relative', top: '14vh'}}>
                     <Grid container direction="column">
                         <Grid item container>    
                                 <Grid item md={6} sm={12} xs={12}>
                                     <Box component="div" className={classes.box}>
                                         <Box component="div" className={classes.boxText} >
                                             <h1>Who we are?</h1>
-                                            <p>We are Non-profit Organization with ambition to reduce food wastage. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
+                                            <p className={classes.pStyle}>We are Non-profit Organization with ambition to reduce food wastage. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -276,7 +305,7 @@ export default function Visit() {
                                     <Box component="div" className={classes.box}>
                                         <Box component="div" className={classes.boxText} >
                                             <h1>Where will your given food will go?</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
+                                            <p className={classes.pStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>
@@ -292,7 +321,7 @@ export default function Visit() {
                                         <Box component="div" className={classes.boxText} >
                                             <h1>Become A Member!</h1>
                                             <div style={{display: 'flex', justifyContent: 'space-around'}}>
-                                                <p>Join now! What are you waiting for?</p>
+                                                <p className={classes.pStyle}>Join now! What are you waiting for?</p>
                                             </div>
                                         </Box>
                                     </Box>
@@ -308,7 +337,7 @@ export default function Visit() {
                                     <Box component="div" className={classes.box}>
                                         <Box component="div" className={classes.boxText} >
                                             <h1>Security</h1>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
+                                            <p className={classes.pStyle}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Dui </p>
                                         </Box>
                                     </Box>
                                 </Grid>

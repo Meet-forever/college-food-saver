@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import ReactEcharts from "echarts-for-react";
 import { Container } from "@material-ui/core";
@@ -131,7 +131,7 @@ function Home() {
           {/* Second Grid will contain elements in row direction*/}
           <Grid item container>
             {/* This will contain Pie chart as C1 R1 */}
-            <Grid item xs={12} sm={12} md={6} alignItems="center" className={classes.paddingForEachElement}>
+            <Grid item xs={12} sm={12} md={6} className={classes.paddingForEachElement}>
               <h1>Weekly Insights</h1>
               <ReactEcharts
                 option={{

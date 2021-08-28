@@ -162,11 +162,10 @@ function List() {
     <div>
       <NavBar />
         <Container style={{ marginTop: '30px', marginBottom: '20px'}} >
-            <Box p={3} style= {{ marginBottom: '20px', border: '1px solid lightgrey', borderRadius:'5px'  }} >
-              <Typography variant="h4" >
-                  Items
-              </Typography>
-            </Box>
+            <Typography variant="h3" color="primary" style={{fontWeight: '600'}}>
+              Items
+            </Typography>
+            
             <ToggleButtonGroup orientation="horizontal" value={view} exclusive onChange={handleChange}
               style={{ display: 'flex', justifyContent: 'flex-end'}}>
                 <ToggleButton value="list" aria-label="list">
