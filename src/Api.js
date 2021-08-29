@@ -1,7 +1,7 @@
 // API creates an interface between the backend and frontend 
-
 // gets all of the items in the database
-// fetching data from the backend using the PORT = 4000
+// fetching data from the backend using the PORT = 4002
+
 export const getItems = () => fetch("http://localhost:4002/").then(res => res.json())
 
 // creates a item in a database 

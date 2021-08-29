@@ -214,7 +214,7 @@ function NavBar() {
     <div className={classes.grow}>
       <AppBar position="static" style={{backgroundColor: 'darkblue'}} >
         <Toolbar>
-        <Link style={{ display: 'flex', alignItems: 'center', textDecoration: "none", color: 'white'}} to={'/login'}>
+        <Link style={{ display: 'flex', alignItems: 'center', textDecoration: "none", color: 'white'}} to={'/listing'}>
           <Avatar className={classes.avatar} style= {{ marginRight: '10px', borderRadius: '20px', backgroundColor: '#14b814'}}>
               <FastfoodIcon style={{fill: '#786010'}} />
           </Avatar>
