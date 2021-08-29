@@ -1,70 +1,59 @@
-# Getting Started with Create React App
+# College Food Saver
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## What it does ?
 
-## Available Scripts
+College Food Saver app thrives in reducing food waste from college dining halls by giving students an opportunity to pick free meals from the dining hall. The app has two views: Client and Student Views. Client view can help dining supervisors to post listing of the food items that needs to be picked by a certain date and time. Student view can help students to pick the item from the listing.
 
-In the project directory, you can run:
+This app can save 22+ million pounds of food waste and also helps students in getting free meals.
 
-### `npm start`
+### How it works ? Tech Stack ?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The app is currently built using <code>React.js</code>, <code>Material-UI Framework</code>, <code>Node.js</code>, <code>Express.js</code>, <code>MongoDB</code>, <code>Firebase</code>, <code>Google Cloud Platform</code>. The frontend of the app is hosted using <code>Firebase Hosting</code> and the backend is hosted on <code>Google App Engine's</code> serveless architecture.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### User Authentication
 
-### `npm test`
+The app uses Firebase authentication to authenticate users with specific domain (@gsu.edu) to create/signin there accounts. A unique UID is stored as a key in the localStorage of the browser to allow user to access the app across different tabs while logged in to there respective accounts. This unique UID gets expired after every 5 hours and the user needs to login again to ensure the security of the user's data. In addition, every time a new account is created user's data is stored in the Firebase Realtime Database which is used by app.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Main App
 
-### `npm run build`
+After an user creates an account in the client view the home/metrics page appears which gives some quick weekly and yearly insights using graphical representation. This data can be used by the dining halls to anaylze the data and improve there service by making it widespread. This page also serves as a motivation for the dining hall department as it shows there impact on society for good cause.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The other links are to see the current listing with the food items posted with the items details like fats, carbs, expiry date, etc. Supervisors in the dining hall can add a new item using the add icon. All of the text data related to listings and new orders are stored in Mongo database. Images related to items are stored in the Firebase Storage.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+<img width="1440" alt="Screen Shot 2021-08-08 at 1 11 33 PM" src="https://user-images.githubusercontent.com/56787472/128639936-f0ae9ae1-fd7b-483c-81b0-37d75c8ceebe.png">
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Google Cloud Platform's SDK for Cloud Tasks API
 
-### `npm run eject`
+To remove the redundancy and improve user experience items in the listing are deleted automatically by the Cloud Tasks API. So every time a new item is created, a new tasks is added to the <code>deletion-process-queue</code> which deletes the item as the clock hits that time. A HTTP DELETE request is sent to the backend serverless Api hosted in Google App Engine which deletes the item from the mongo database.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<img width="1343" alt="Screen Shot 2021-08-07 at 7 40 43 PM" src="https://user-images.githubusercontent.com/56787472/128616367-66f71287-f0d3-46fe-9dc7-2b5544c93486.png">
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Architecture/ WireFrame
 
-## Learn More
+<img width="1166" alt="Screen Shot 2021-08-08 at 1 16 28 PM" src="https://user-images.githubusercontent.com/56787472/128640065-d06eda7e-3d75-4989-b31e-e3d6b7a4204f.png">
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+## Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Use ```git clone --branch master https://github.com/ayushbudh/college-food-saver``` or Download button to use the code on your local machine.
+2. After the code is downloaded into your local machine run ```npm install``` in your CMP/terminal.
+3. Open another terminal or split the terminal and navigate inside the ```/src/backend/``` directory to run ```npm install``` in your CMP/terminal.
+4. After the installation is complete run the command ```npm run serve``` inside your /src/backend terminal to start the backend server.
+5. Finally run command ```npm start``` within the root of the project to start the local server in port 3000.
 
-### Analyzing the Bundle Size
+Note: You might need to install Node on your local machine if it's already not installed.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Current Version
+client - ``` v1.3 ``` <br>
+customer - ``` v1.0 ```
 
-### Making a Progressive Web App
+## Contributors
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+<a href="https://github.com/ayushbudh/college-food-saver/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ayushbudh/college-food-saver" />
+</a>
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with [contributors-img](https://contrib.rocks). Feel free to contribute!
