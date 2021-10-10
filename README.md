@@ -56,4 +56,3 @@ customer - ``` v1.0 ```
   <img src="https://contrib.rocks/image?repo=ayushbudh/college-food-saver" />
 </a>
 
-Made with [contributors-img](https://contrib.rocks). Feel free to contribute!
