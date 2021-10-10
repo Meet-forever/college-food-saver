@@ -50,9 +50,3 @@ Note: You might need to install Node on your local machine if it's already not i
 client - ``` v1.3 ``` <br>
 customer - ``` v1.0 ```
 
-## Contributors
-
-<a href="https://github.com/ayushbudh/college-food-saver/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ayushbudh/college-food-saver" />
-</a>
-
